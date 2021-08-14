@@ -1,0 +1,46 @@
+System.out.println("***** 모든매물정보 검색 *****");
+BuildingController.getAllApp();
+
+System.out.println("\n***** 모든 Building 검색 *****");
+BuildingController.getAllBuilding();
+
+System.out.println("\n***** 특정 지역으로 Building 정보 검색 *****");
+BuildingController.getRegion("서대문구");
+
+System.out.println("\n***** 특정 Building Type으로 Building 정보 검색 *****");
+BuildingController.getBuildingType("오피스텔");
+
+System.out.println("\n***** 가격대로 매물 정보 검색 *****");
+BuildingController.getDeposit("보증금", 0, 100000000);
+
+System.out.println("\n***** 직빵 등록번호로 매물 정보 검색 *****");
+BuildingController.getAppId("5");
+
+System.out.println("\n***** 건물 매물 번호로 매물 정보 검색 *****");
+BuildingController.getBuildingId("55");
+
+System.out.println("\n***** 모든 판매자 검색 *****");
+BuildingController.getAllSeller();
+
+System.out.println("\n***** 판매자 정보 수정 *****");
+BuildingController.updateSeller("seller1", "김혜경", "010-7777-7777");
+BuildingController.updateSeller("seller1", "조하운", "010-1111-1111");
+
+System.out.println("\n***** 모든 판매자 검색 *****");
+BuildingController.getAllSeller();
+
+System.out.println("\n***** 새로운 매물 저장 *****");
+BuildingController.addBuilding(new BuildingDTO("66", "관악구", "신림동 94-208", "전원주택"));
+BuildingController.addPrice(new PriceDTO("6", 0, 0, 250000));
+BuildingController.addApp(new AppDTO("6", "66", "월세", "seller3", "FALSE"));
+
+System.out.println("***** 모든매물정보 검색 *****");
+BuildingController.getAllApp();
+
+System.out.println("\n***** 매물 삭제 *****");
+BuildingController.deleteApp("6");
+BuildingController.deleteBuilding("66");
+BuildingController.deletePrice("6");
+
+System.out.println("***** 모든매물정보 검색 *****");
+BuildingController.getAllApp();
