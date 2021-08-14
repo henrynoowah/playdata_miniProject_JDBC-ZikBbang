@@ -28,5 +28,8 @@ hs_err_pid*
 
 # End of https://www.toptal.com/developers/gitignore/api/java
 
-# DB conenction
+# DB conenction 보안상 각자의 db.properties 사용
 db.properties
+
+# log4j 기록 로컬파일경로가 다르기 때문에 각자의 lo4j.properties 사용
+log4j.properties
