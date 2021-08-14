@@ -28,6 +28,31 @@ public class BuildingController {
 	public static BuildingController getInstance() {
 		return instance;
 	}
+	
+	// 로그인 확인
+	public boolean logIn(String nickName, String pw) {
+		try {
+			if(bs.getProfile(nickName, pw) != null) {
+				return true;
+			} 
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return false;
+	}
+	
+	// 판매자계정 확인
+	public boolean checkProfile(String nickName, String pw) {
+		try {
+			if(bs.getProfile(nickName, pw).getSellerID() != null) {
+				return true;
+			};
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	// 모든 매물정보 검색 로직
 	public void getAllApp() {
@@ -448,4 +473,7 @@ public class BuildingController {
 		Log.welcome();
 		Start.start();
 	}
+
+
+
 }

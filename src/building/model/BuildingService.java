@@ -7,6 +7,7 @@ import building.exception.NotExistException;
 import building.model.dto.AppDTO;
 import building.model.dto.BuildingDTO;
 import building.model.dto.PriceDTO;
+import building.model.dto.ProfileDTO;
 import building.model.dto.SellerDTO;
 
 public class BuildingService {
@@ -19,7 +20,13 @@ public class BuildingService {
 	public static BuildingService getInstance() {
 		return instance;
 	}
-
+	
+	// 로그인 정보 
+	public ProfileDTO getProfile(String nickName, String pw) throws SQLException {
+		ProfileDTO profile = ProfileDAO.getProfile(nickName, pw);
+		return profile;
+	}
+	
 	// 모든 매물정보 반환
 	public ArrayList<AppDTO> getAllApp() throws SQLException {
 		return AppDAO.getAllApp();
@@ -176,5 +183,6 @@ public class BuildingService {
 		notExistApp(appId);
 		return AppDAO.deleteApp(appId);
 	}
+
 
 }

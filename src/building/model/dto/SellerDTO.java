@@ -1,6 +1,6 @@
 package building.model.dto;
 
-public class SellerDTO {
+public class SellerDTO extends ProfileDTO{
 	
 	private String sellerID;
 	private String name;

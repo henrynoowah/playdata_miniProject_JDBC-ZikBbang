@@ -1,12 +1,12 @@
-insert into BUILDING values('11', '¼­´ë¹®±¸', 'Ã¢Ãµµ¿ 31-82 201È£', '¿ÀÇÇ½ºÅÚ');
-insert into BUILDING values('22', 'ÀºÆò±¸', 'ºÒ±¤·Î 16±æ 25-7 2Ãþ', '¿ø·ë');
-insert into BUILDING values('33', '¼­´ë¹®±¸', '¼­´ë¹®±¸ 21±æ 265-1', 'Àü¿øÁÖÅÃ');
-insert into BUILDING values('44', '°­³²±¸', '¿ª»ï·Î 136 11-6', '¿ÀÇÇ½ºÅÚ');
-insert into BUILDING values('55', '°ü¾Ç±¸', 'Àº¸¶¾ÆÆÄÆ® 3µ¿ 101È£', '¿ø·ë');
-insert into BUILDING values('66', 'ÀºÆò±¸', 'ÆæÆ®ÇÏ¿ì½º ²À´ë±âÃþ', 'Àü¿øÁÖÅÃ');
-insert into BUILDING values('77', '°ü¾Ç±¸', '´ëÇÐ·Î 111-2 2Ãþ', '¿ÀÇÇ½ºÅÚ');
-insert into BUILDING values('88', '¼­´ë¹®±¸', '¸ð·¡³»·Î 254-2 101È£', '¿ø·ë');
-insert into BUILDING values('99', '°ü¾Ç±¸', '³²ºÎ¼øÇÑ·Î 78', '¿ø·ë');
+insert into BUILDING values('11', 'ï¿½ï¿½ï¿½ë¹®ï¿½ï¿½', 'Ã¢Ãµï¿½ï¿½ 31-82 201È£', 'ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½');
+insert into BUILDING values('22', 'ï¿½ï¿½ï¿½ï¿½', 'ï¿½Ò±ï¿½ï¿½ï¿½ 16ï¿½ï¿½ 25-7 2ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½');
+insert into BUILDING values('33', 'ï¿½ï¿½ï¿½ë¹®ï¿½ï¿½', 'ï¿½ï¿½ï¿½ë¹®ï¿½ï¿½ 21ï¿½ï¿½ 265-1', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+insert into BUILDING values('44', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½ï¿½ 136 11-6', 'ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½');
+insert into BUILDING values('55', 'ï¿½ï¿½ï¿½Ç±ï¿½', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® 3ï¿½ï¿½ 101È£', 'ï¿½ï¿½ï¿½ï¿½');
+insert into BUILDING values('66', 'ï¿½ï¿½ï¿½ï¿½', 'ï¿½ï¿½Æ®ï¿½Ï¿ì½º ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½');
+insert into BUILDING values('77', 'ï¿½ï¿½ï¿½Ç±ï¿½', 'ï¿½ï¿½ï¿½Ð·ï¿½ 111-2 2ï¿½ï¿½', 'ï¿½ï¿½ï¿½Ç½ï¿½ï¿½ï¿½');
+insert into BUILDING values('88', 'ï¿½ï¿½ï¿½ë¹®ï¿½ï¿½', 'ï¿½ð·¡³ï¿½ï¿½ï¿½ 254-2 101È£', 'ï¿½ï¿½ï¿½ï¿½');
+insert into BUILDING values('99', 'ï¿½ï¿½ï¿½Ç±ï¿½', 'ï¿½ï¿½ï¿½Î¼ï¿½ï¿½Ñ·ï¿½ 78', 'ï¿½ï¿½ï¿½ï¿½');
 
 insert into PRICE values('1', 0, 0, 80000);
 insert into PRICE values('2', 15000, 0, 0);
@@ -18,20 +18,25 @@ insert into PRICE values('7', 50000, 10, 0);
 insert into PRICE values('8', 7700, 100, 0);
 insert into PRICE values('9', 200000, 40, 0);
 
-insert into SELLER values('seller1', 'Á¶ÇÏ¿î', '010-1111-1111');
-insert into SELLER values('seller2', '¹Ú¼­Àº', '010-2222-2222');
-insert into SELLER values('seller3', '°ûÇü¸²', '010-3333-3333');
-insert into SELLER values('seller4', 'ÁÖ´ÜÅÂ', '010-4444-6666' );
-insert into SELLER values('seller5', '¿ì¾ÆÇÑ', '010-5555-7777' );
+insert into SELLER values('seller1', 'ï¿½ï¿½ï¿½Ï¿ï¿½', '010-1111-1111');
+insert into SELLER values('seller2', 'ï¿½Ú¼ï¿½ï¿½ï¿½', '010-2222-2222');
+insert into SELLER values('seller3', 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½', '010-3333-3333');
+insert into SELLER values('seller4', 'ï¿½Ö´ï¿½ï¿½ï¿½', '010-4444-6666' );
+insert into SELLER values('seller5', 'ï¿½ï¿½ï¿½ï¿½ï¿½', '010-5555-7777' );
 
-insert into APP values('1', '11', '¸Å¸Å', 'seller1', 'TRUE');
-insert into APP values('2', '22', 'Àü¼¼', 'seller2', 'FALSE');
-insert into APP values('3', '33', '¸Å¸Å', 'seller3', 'TRUE');
-insert into APP values('4', '44', 'Àü¼¼', 'seller1', 'FALSE');
-insert into APP values('5', '55', '¿ù¼¼', 'seller2', 'FALSE');
-insert into APP values('6', '66', '¿ù¼¼', 'seller5', 'TRUE');
-insert into APP values('7', '77', '¿ù¼¼', 'seller4', 'TRUE');
-insert into APP values('8', '88', '¿ù¼¼', 'seller4', 'FALSE');
-insert into APP values('9', '99', '¿ù¼¼', 'seller4', 'TRUE');
+insert into APP values('1', '11', 'ï¿½Å¸ï¿½', 'seller1', 'TRUE');
+insert into APP values('2', '22', 'ï¿½ï¿½ï¿½ï¿½', 'seller2', 'FALSE');
+insert into APP values('3', '33', 'ï¿½Å¸ï¿½', 'seller3', 'TRUE');
+insert into APP values('4', '44', 'ï¿½ï¿½ï¿½ï¿½', 'seller1', 'FALSE');
+insert into APP values('5', '55', 'ï¿½ï¿½ï¿½ï¿½', 'seller2', 'FALSE');
+insert into APP values('6', '66', 'ï¿½ï¿½ï¿½ï¿½', 'seller5', 'TRUE');
+insert into APP values('7', '77', 'ï¿½ï¿½ï¿½ï¿½', 'seller4', 'TRUE');
+insert into APP values('8', '88', 'ï¿½ï¿½ï¿½ï¿½', 'seller4', 'FALSE');
+insert into APP values('9', '99', 'ï¿½ï¿½ï¿½ï¿½', 'seller4', 'TRUE');
+
+INSERT INTO PROFILE VALUES('henrynoowah', 'henrynoowah', 'seller1');
+INSERT INTO PROFILE VALUES('hyungnim', 'khr', 'seller2');
+INSERT INTO PROFILE VALUES('parkse', 'pse', 'seller3');
+INSERT INTO PROFILE VALUES('woosongsong', 'babo', null);
 
 COMMIT;

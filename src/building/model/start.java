@@ -20,23 +20,38 @@ public class Start {
 	public static void start() {
 		BuildingController bc = BuildingController.getInstance();
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String name = null;
-		boolean triger = true;
+		String nickName = null;
+//		계정 테이블 추가하여 로그인 비슷한 기능 구현
+		String pw = null;
+		boolean trigger = true;
 		
 		System.out.println("직빵에 오신걸 환영합니다");
-		System.out.print("당신의 이름을 적어주세요 : ");
+		System.out.print("닉네임을 적어주세요 : ");
 		try {
-			name = br.readLine();
+			nickName = br.readLine();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		}
+		System.out.print("비밀번호를 적어주세요 : ");
+		try {
+			pw = br.readLine();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		boolean loggedIn = bc.logIn(nickName, pw);
+		if(!(loggedIn)) {
+			System.out.println("\n없는 계정입니다\n");
+			start();
+		}
 		
-		Log.inputName(name);
+		Log.inputName(nickName);
+		System.out.println("\nWelcone " + nickName + "!\n");
 
 		try {
-			while (triger) {
-				System.out.println("\n============================== 메뉴를 선택해주세요. ============================== ");
-				System.out.println("1. 검색            2. 추가            3. 수정            4. 삭제            5.로그            0.종료");
+			while (trigger) {
+				
+				System.out.println("\n==================================== 메뉴를 선택해주세요. =======================================");
+				System.out.println("1. 검색            2. 추가            3. 수정            4. 삭제            5.로그	6.로그아웃            0.종료");
 				int inputNum = Integer.parseInt(br.readLine());
 
 				if (inputNum == 1) {
@@ -229,6 +244,14 @@ public class Start {
 						System.out.println("잘못 입력하셨습니다");
 					}
 				} else if (inputNum == 3) {
+					
+					boolean seller = bc.checkProfile(nickName, pw);
+					
+					if(seller) {
+						
+					} else {
+						
+					}
 					System.out.println("\n============================================================");
 					System.out.println("1. 매물            2. 건물            3. 가격            4.판매자");
 					int update = Integer.parseInt(br.readLine());
@@ -432,10 +455,14 @@ public class Start {
 							e.printStackTrace();
 						}
 					}
+				} else if (inputNum == 6) {
+					System.out.println("\n안녕히 가세요! 로그아웃합니다.\n");
+					start();
+					
 				} else if (inputNum == 0) {
 					System.out.println("\n안녕히 가세요! 직빵 플랫폼 종료합니다.");
-					Log.serviceClose(name);
-					triger = false;
+					Log.serviceClose(nickName);
+					trigger = false;
 				}
 			}
 		} catch (IOException e) {
