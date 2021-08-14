@@ -9,7 +9,7 @@ import building.model.BuildingDAO;
 import building.model.BuildingService;
 import building.model.PriceDAO;
 import building.model.SellerDAO;
-import building.model.start;
+import building.model.Start;
 import building.model.dto.AppDTO;
 import building.model.dto.BuildingDTO;
 import building.model.dto.PriceDTO;
@@ -446,6 +446,6 @@ public class BuildingController {
 
 	public void start() {
 		Log.welcome();
-		start.start();
+		Start.start();
 	}
 }

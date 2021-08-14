@@ -15,7 +15,7 @@ import building.model.dto.PriceDTO;
 import building.model.dto.SellerDTO;
 import log4j.Log;
 
-public class start {
+public class Start {
 
 	public static void start() {
 		BuildingController bc = BuildingController.getInstance();
