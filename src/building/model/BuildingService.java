@@ -3,10 +3,12 @@ package building.model;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import building.exception.DuplicateException;
 import building.exception.NotExistException;
 import building.model.dto.AppDTO;
 import building.model.dto.BuildingDTO;
 import building.model.dto.PriceDTO;
+import building.model.dto.ProfileDTO;
 import building.model.dto.SellerDTO;
 
 public class BuildingService {
@@ -16,12 +18,33 @@ public class BuildingService {
 	private static BuildingDAO bIns = BuildingDAO.getInstance();
 	private static PriceDAO pIns = PriceDAO.getInstance();
 	private static SellerDAO sIns = SellerDAO.getInstance();
+	private static ProfileDAO profileIns = ProfileDAO.getInstance();
 
 	private BuildingService() {}
 
 	public static BuildingService getInstance() {
 		return instance;
 	}
+	
+	// 로그인 정보 
+	public ProfileDTO getProfile(String nickName, String pw) throws SQLException {
+		return profileIns.getProfile(nickName, pw);
+	}
+	
+	// 화원가입
+	public boolean addProfile(String newNickName, String newPw) throws SQLException, DuplicateException {
+		ProfileDTO profile = profileIns.getProfile(newNickName);
+		if (profile != null) {
+			throw new DuplicateException();
+		}
+		return profileIns.addProfile(newNickName, newPw);
+	}
+	
+	// 계정 판매자 정보 추가
+	public boolean addProfileSeller(String nickName, String sellerId) throws SQLException {
+		return profileIns.addProfileSeller(nickName, sellerId);
+	}
+
 
 	// 모든 매물정보 반환
 	public ArrayList<AppDTO> getAllApp() throws SQLException {

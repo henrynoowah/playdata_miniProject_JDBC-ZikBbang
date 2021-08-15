@@ -3,6 +3,7 @@ package building.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import building.exception.DuplicateException;
 import building.exception.NotExistException;
 import building.model.BuildingService;
 import building.model.dto.AppDTO;
@@ -23,6 +24,42 @@ public class BuildingController {
 	public static BuildingController getInstance() {
 		return instance;
 	}
+	
+	// 로그인 확인
+	public boolean logIn(String nickName, String pw) {
+		try {
+			if(bs.getProfile(nickName, pw) != null) {
+				return true;
+			} 
+		} catch (SQLException s) {
+			s.printStackTrace();
+		}
+		return false;
+	}
+	
+	// 판매자 계정 확인
+	public boolean checkProfile(String nickName, String pw) {
+		try {
+			if(bs.getProfile(nickName, pw).getSellerId() != null) {
+				return true;
+			};
+		} catch (SQLException s) {
+			s.printStackTrace();
+		} catch (NullPointerException e) {
+//			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	// 계정 판매자정보 추가
+	public boolean addProfileSeller(String nickName, String sellerId) {
+		try {
+			return bs.addProfileSeller(nickName, sellerId);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 	// 모든 매물정보 검색 로직
 	public void getAllApp() {
@@ -32,6 +69,16 @@ public class BuildingController {
 		} catch (SQLException s) {
 			RunningEndView.showError("모든 매물정보 검색시 에러 발생");
 		}
+	}
+	
+	// 회원가입
+	public boolean register(String newNickName, String newPw) {
+		try {
+			return bs.addProfile(newNickName, newPw);		
+		} catch (SQLException | DuplicateException s) {
+			RunningEndView.showError("\n이미사용되고 있는 아이디입니다\n");
+		}
+		return false;
 	}
 
 	// 모든 Building 검색 로직
@@ -88,7 +135,6 @@ public class BuildingController {
 		} catch (NotExistException e) {
 			RunningEndView.showError("App Id로 해당 매물 검색 오류 ");
 		}
-
 		return app;
 	}
 
@@ -419,4 +465,8 @@ public class BuildingController {
 		Log.welcome();
 		Start.start();
 	}
+
+
+
+
 }

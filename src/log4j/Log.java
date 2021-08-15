@@ -15,6 +15,11 @@ public class Log {
 		logger.info(name + "님이 들어오셨습니다");
 	}
 	
+	// 회원가입 성공
+	public static void register(String newNickName) {
+		logger.info(newNickName + "회원가입성공");
+	}
+	
 	// 서비스 종료
 	public static void serviceClose(String name) {
 		logger.info(name + "님이 서비스를 종료하셨습니다");
@@ -123,4 +128,5 @@ public class Log {
 			logger.info("요청하신 [직빵번호 : " + Id + "] delete 완료");
 		}
 	}
+
 }
