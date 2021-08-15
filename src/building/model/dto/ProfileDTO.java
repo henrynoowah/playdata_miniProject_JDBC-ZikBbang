@@ -14,30 +14,30 @@ public class ProfileDTO {
 		this.sellerId = phone;
 	}
 
-	public String getSellerID() {
+	public String getNickName() {
 		return nickName;
 	}
-
-	public void setSellerID(String sellerID) {
-		this.nickName = sellerID;
+	
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
 	}
-
-	public String getName() {
+	
+	public String getPw() {
 		return pw;
 	}
-
-	public void setName(String name) {
-		this.pw = name;
+	
+	public void setPw(String pw) {
+		this.pw = pw;
 	}
-
-	public String getPhone() {
+	
+	public String getSellerId() {
 		return sellerId;
 	}
-
-	public void setPhone(String phone) {
-		this.sellerId = phone;
+	
+	public void setSellerId(String sellerId) {
+		this.sellerId = sellerId;
 	}
-
+	
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

@@ -16,42 +16,26 @@ import building.model.dto.SellerDTO;
 import log4j.Log;
 
 public class Start {
-
-	public static void start() {
-		BuildingController bc = BuildingController.getInstance();
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String nickName = null;
-//		계정 테이블 추가하여 로그인 비슷한 기능 구현
-		String pw = null;
-		boolean trigger = true;
-		
-		System.out.println("직빵에 오신걸 환영합니다");
-		System.out.print("닉네임을 적어주세요 : ");
-		try {
-			nickName = br.readLine();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		System.out.print("비밀번호를 적어주세요 : ");
-		try {
-			pw = br.readLine();
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
-		boolean loggedIn = bc.logIn(nickName, pw);
-		if(!(loggedIn)) {
-			System.out.println("\n없는 계정입니다\n");
-			start();
-		}
-		
-		Log.inputName(nickName);
-		System.out.println("\nWelcone " + nickName + "!\n");
-
+	
+	static BuildingController bc = BuildingController.getInstance();
+	static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static boolean trigger = false;
+	static String nickName = null;
+	static String pw = null;
+	
+	public static void mainPage() {
+		trigger = true;
+		System.out.println("\n==================================== 메뉴를 선택해주세요. =======================================");
+		System.out.println("1. 검색            2. 추가            3. 수정            4. 삭제            5.로그	6.로그아웃            0.종료");
+	}
+	
+	public static void loggedInPage(String nickName, String pw, BuildingController bc, BufferedReader br) {
 		try {
 			while (trigger) {
 				
-				System.out.println("\n==================================== 메뉴를 선택해주세요. =======================================");
-				System.out.println("1. 검색            2. 추가            3. 수정            4. 삭제            5.로그	6.로그아웃            0.종료");
+				boolean checkSeller = bc.checkProfile(nickName, pw);
+				
+				mainPage();
 				int inputNum = Integer.parseInt(br.readLine());
 
 				if (inputNum == 1) {
@@ -156,125 +140,205 @@ public class Start {
 						System.out.println("\n잘못 입력하셨습니다");
 					}
 				} else if (inputNum == 2) {
-					System.out.println("\n============================================================");
-					System.out.println("1. 매물            2. 판매자");
-					int insert = Integer.parseInt(br.readLine());
-
-					if (insert == 1) {
-						int trade_price = 0;
-						int deposit = 0;
-						int monthly_rent = 0;
-						
+					
+					if(!(checkSeller)) {
+						System.out.println("당신은 퍈매자가 아닙니다");
+						trigger = false;
+						mainPage();
+					} else {	
 						System.out.println("\n============================================================");
-						System.out.print("추가할 Building Id를 입력해주세요 : ");
-						String buildingId = br.readLine();
-						
-						boolean result = bc.getBuildingIdStart(buildingId);
-						
-						if(result != true) {
-							System.out.print("추가할 건물의 지역을 입력해주세요 : ");
-							String region = br.readLine();
-							System.out.print("추가할 건물의 주소를 입력해주세요 : ");
-							String address = br.readLine();
-							System.out.print("추가할 건물의 유형을 입력해주세요(원룸, 오피스텔, 전원주택) : ");
-							String type = br.readLine();
-							System.out.print("추가할 App Id를 입력해주세요 : ");
-							String appId = br.readLine();
+						System.out.println("1. 매물            2. 판매자");
+						int insert = Integer.parseInt(br.readLine());
+	
+						if (insert == 1) {
+							int trade_price = 0;
+							int deposit = 0;
+							int monthly_rent = 0;
 							
-							boolean result2 = bc.getAppIdStart(appId);
+							System.out.println("\n============================================================");
+							System.out.print("추가할 Building Id를 입력해주세요 : ");
+							String buildingId = br.readLine();
 							
-							if(result2 != true) {
-								System.out.print("추가할 매물 유형을 입력해주세요(월세, 전세, 매매) : ");
-								String trade_type = br.readLine();
+							boolean result = bc.getBuildingIdStart(buildingId);
+							
+							if(result != true) {
+								System.out.print("추가할 건물의 지역을 입력해주세요 : ");
+								String region = br.readLine();
+								System.out.print("추가할 건물의 주소를 입력해주세요 : ");
+								String address = br.readLine();
+								System.out.print("추가할 건물의 유형을 입력해주세요(원룸, 오피스텔, 전원주택) : ");
+								String type = br.readLine();
+								System.out.print("추가할 App Id를 입력해주세요 : ");
+								String appId = br.readLine();
 								
-								if(trade_type.equals("월세")) {
-									System.out.print("추가할 건물의 보증금의 액수를 입력해주세요(단위:만원) : ");
-									deposit = Integer.parseInt(br.readLine());
-									System.out.print("추가할 건물의 월세의 액수 입력해주세요(단위:만원) : ");
-									monthly_rent = Integer.parseInt(br.readLine());	
-								}else if(trade_type.equals("전세")) {
-									System.out.print("추가할 건물의 보증금의 액수를 입력해주세요(단위:만원) : ");
-									deposit = Integer.parseInt(br.readLine());
-								}else if(trade_type.equals("매매")) {
-									System.out.print("추가할 건물의 매매가의 액수를 입력해주세요(단위:만원) : ");
-									trade_price = Integer.parseInt(br.readLine());
+								boolean result2 = bc.getAppIdStart(appId);
+								
+								if(result2 != true) {
+									System.out.print("추가할 매물 유형을 입력해주세요(월세, 전세, 매매) : ");
+									String trade_type = br.readLine();
+									
+									if(trade_type.equals("월세")) {
+										System.out.print("추가할 건물의 보증금의 액수를 입력해주세요(단위:만원) : ");
+										deposit = Integer.parseInt(br.readLine());
+										System.out.print("추가할 건물의 월세의 액수 입력해주세요(단위:만원) : ");
+										monthly_rent = Integer.parseInt(br.readLine());	
+									}else if(trade_type.equals("전세")) {
+										System.out.print("추가할 건물의 보증금의 액수를 입력해주세요(단위:만원) : ");
+										deposit = Integer.parseInt(br.readLine());
+									}else if(trade_type.equals("매매")) {
+										System.out.print("추가할 건물의 매매가의 액수를 입력해주세요(단위:만원) : ");
+										trade_price = Integer.parseInt(br.readLine());
+									}else {
+										System.out.println("지원하지 않는 매물 유형입니다");
+									}
+									
+									System.out.print("추가할 Seller Id를 입력해주세요 : ");
+									String sellerId = br.readLine();
+									
+									System.out.print("추가할 세입자 여부를 입력해주세요(TRUE or FALSE) : ");
+									String tenant = br.readLine();
+									
+									BuildingDTO building = new BuildingDTO(buildingId, region, address, type);
+									PriceDTO price = new PriceDTO(appId, deposit, monthly_rent, trade_price);
+									AppDTO app = new AppDTO(appId, buildingId, trade_type, sellerId, tenant);
+			
+									System.out.println();
+									bc.addApp(app, building, price);
 								}else {
-									System.out.println("지원하지 않는 매물 유형입니다");
+									System.out.println("\n해당 App Id는 이미 있는 Id입니다");
 								}
-								
-								System.out.print("추가할 Seller Id를 입력해주세요 : ");
-								String sellerId = br.readLine();
-								
-								System.out.print("추가할 세입자 여부를 입력해주세요(TRUE or FALSE) : ");
-								String tenant = br.readLine();
-								
-								BuildingDTO building = new BuildingDTO(buildingId, region, address, type);
-								PriceDTO price = new PriceDTO(appId, deposit, monthly_rent, trade_price);
-								AppDTO app = new AppDTO(appId, buildingId, trade_type, sellerId, tenant);
+							}else {
+								System.out.println("\n해당 Building Id는 이미 있는 Id입니다");
+							}
+						} else if (insert == 2) {
+							System.out.println("\n============================================================");
+							System.out.print("추가할 Seller Id를 입력해주세요 : ");
+							String sellerId = br.readLine();
+							
+							boolean result = bc.getSellerIdStart(sellerId);
+							
+							if(result != true) {
+								System.out.print("추가할 판매자 이름을 입력해주세요 : ");
+								String sellerName = br.readLine();
+								System.out.print("추가할 판매자 휴대폰 번호를 입력해주세요 : ");
+								String phone = br.readLine();
+		
+								SellerDTO seller = new SellerDTO(sellerId, sellerName, phone);
 		
 								System.out.println();
-								bc.addApp(app, building, price);
+								bc.addSeller(seller);
 							}else {
-								System.out.println("\n해당 App Id는 이미 있는 Id입니다");
+								System.out.println("\n해당 Seller Id는 이미 있는 Id입니다");
 							}
-						}else {
-							System.out.println("\n해당 Building Id는 이미 있는 Id입니다");
+						} else {
+							System.out.println("잘못 입력하셨습니다");
 						}
-					} else if (insert == 2) {
-						System.out.println("\n============================================================");
-						System.out.print("추가할 Seller Id를 입력해주세요 : ");
-						String sellerId = br.readLine();
-						
-						boolean result = bc.getSellerIdStart(sellerId);
-						
-						if(result != true) {
-							System.out.print("추가할 판매자 이름을 입력해주세요 : ");
-							String sellerName = br.readLine();
-							System.out.print("추가할 판매자 휴대폰 번호를 입력해주세요 : ");
-							String phone = br.readLine();
-	
-							SellerDTO seller = new SellerDTO(sellerId, sellerName, phone);
-	
-							System.out.println();
-							bc.addSeller(seller);
-						}else {
-							System.out.println("\n해당 Seller Id는 이미 있는 Id입니다");
-						}
-					} else {
-						System.out.println("잘못 입력하셨습니다");
 					}
 				} else if (inputNum == 3) {
-					
-					boolean seller = bc.checkProfile(nickName, pw);
-					
-					if(seller) {
-						
-					} else {
-						
-					}
-					System.out.println("\n============================================================");
-					System.out.println("1. 매물            2. 건물            3. 가격            4.판매자");
-					int update = Integer.parseInt(br.readLine());
-
-					if (update == 1) {
+										
+					if(!(checkSeller)) {
+						System.out.println("당신은 퍈매자가 아닙니다");
+						trigger = false;
+						mainPage();
+					} else {				
 						System.out.println("\n============================================================");
-						System.out.print("수정할 App Id를 입력해주세요 : ");
-						String appId = br.readLine();
-
-						boolean result = bc.getAppIdStart(appId);
-
-						if (result == true) {
-							System.out.println("\n1. 매물 유형            2. 세입자 여부            3. 매물 유형과 세입자 여부");
-							int app = Integer.parseInt(br.readLine());
-
-							if (app == 1) {
-								System.out.println("\n============================================================");
-								System.out.print("수정할 매물 유형을 입력해주세요(월세, 전세, 매매) : ");
-								String trade_type = br.readLine();
-
+						System.out.println("1. 매물            2. 건물            3. 가격            4.판매자");
+						int update = Integer.parseInt(br.readLine());
+	
+						if (update == 1) {
+							System.out.println("\n============================================================");
+							System.out.print("수정할 App Id를 입력해주세요 : ");
+							String appId = br.readLine();
+	
+							boolean result = bc.getAppIdStart(appId);
+	
+							if (result == true) {
+								System.out.println("\n1. 매물 유형            2. 세입자 여부            3. 매물 유형과 세입자 여부");
+								int app = Integer.parseInt(br.readLine());
+	
+								if (app == 1) {
+									System.out.println("\n============================================================");
+									System.out.print("수정할 매물 유형을 입력해주세요(월세, 전세, 매매) : ");
+									String trade_type = br.readLine();
+	
+									int deposit = 0;
+									int monthly_rent = 0;
+									int trade_price = 0;
+									
+									if(trade_type.equals("월세")) {
+										System.out.print("수정할 건물의 보증금의 액수를 입력해주세요(단위:만원) : ");
+										deposit = Integer.parseInt(br.readLine());
+										System.out.print("수정할 건물의 월세의 액수 입력해주세요(단위:만원) : ");
+										monthly_rent = Integer.parseInt(br.readLine());	
+									}else if(trade_type.equals("전세")) {
+										System.out.print("수정할 건물의 보증금의 액수를 입력해주세요(단위:만원) : ");
+										deposit = Integer.parseInt(br.readLine());
+									}else if(trade_type.equals("매매")) {
+										System.out.print("수정할 건물의 매매가의 액수를 입력해주세요(단위:만원) : ");
+										trade_price = Integer.parseInt(br.readLine());
+									}else {
+										System.out.println("지원하지 않는 매물 유형입니다");
+									}
+									
+									System.out.println();
+									bc.updateAppTradeType(appId, trade_type);
+									bc.updatePrice(appId, deposit, monthly_rent, trade_price);
+								} else if (app == 2) {
+									System.out.println("\n============================================================");
+									System.out.print("수정할 세입자 여부를 입력해주세요(TRUE or FALSE) : ");
+									String tenant = br.readLine();
+	
+									bc.updateAppTenant(appId, tenant);
+								} else if (app == 3) {
+									System.out.println("\n============================================================");
+									System.out.print("수정할 매물 유형을 입력해주세요(월세, 전세, 매매) : ");
+									String trade_type = br.readLine();
+									System.out.print("수정할 세입자 여부를 입력해주세요(TRUE or FALSE) : ");
+									String tenant = br.readLine();
+	
+									System.out.println();
+									bc.updateAppTradeType(appId, trade_type);
+									bc.updateAppTenant(appId, tenant);
+								} else {
+									System.out.println("\n잘못 입력하셨습니다");
+								}
+							} else {
+								System.out.println("\n해당 App Id는 없습니다");
+							}
+						} else if (update == 2) {
+							System.out.println("\n============================================================");
+							System.out.print("수정할 Building Id를 입력해주세요 : ");
+							String buildingId = br.readLine();
+	
+							boolean result = bc.getBuildingIdStart(buildingId);
+	
+							if (result == true) {
+								System.out.print("수정할 건물의 지역을 입력해주세요 : ");
+								String region = br.readLine();
+								System.out.print("수정할 건물의 주소를 입력해주세요 : ");
+								String address = br.readLine();
+								System.out.print("수정할 건물의 유형을 입력해주세요(원룸, 오피스텔, 전원주택) : ");
+								String type = br.readLine();
+	
+								System.out.println();
+								bc.updateBuilding(buildingId, region, address, type);
+							} else {
+								System.out.println("\n해당 Building Id는 없습니다");
+							}
+						} else if (update == 3) {
+							System.out.println("\n============================================================");
+							System.out.print("수정할 App Id를 입력해주세요 : ");
+							String appId = br.readLine();
+	
+							boolean result = bc.getAppIdPriceStart(appId);
+	
+							if (result == true) {
 								int deposit = 0;
 								int monthly_rent = 0;
 								int trade_price = 0;
+								String trade_type = bc.getAppIdContent(appId).getTradeType();
+								
+								System.out.println("해당 App Id의 가격 유형은 " + trade_type + "입니다");
 								
 								if(trade_type.equals("월세")) {
 									System.out.print("수정할 건물의 보증금의 액수를 입력해주세요(단위:만원) : ");
@@ -292,108 +356,33 @@ public class Start {
 								}
 								
 								System.out.println();
-								bc.updateAppTradeType(appId, trade_type);
 								bc.updatePrice(appId, deposit, monthly_rent, trade_price);
-							} else if (app == 2) {
-								System.out.println("\n============================================================");
-								System.out.print("수정할 세입자 여부를 입력해주세요(TRUE or FALSE) : ");
-								String tenant = br.readLine();
-
-								bc.updateAppTenant(appId, tenant);
-							} else if (app == 3) {
-								System.out.println("\n============================================================");
-								System.out.print("수정할 매물 유형을 입력해주세요(월세, 전세, 매매) : ");
-								String trade_type = br.readLine();
-								System.out.print("수정할 세입자 여부를 입력해주세요(TRUE or FALSE) : ");
-								String tenant = br.readLine();
-
-								System.out.println();
-								bc.updateAppTradeType(appId, trade_type);
-								bc.updateAppTenant(appId, tenant);
 							} else {
-								System.out.println("\n잘못 입력하셨습니다");
+								System.out.println("\n해당 App Id는 없습니다");
+							}
+						} else if (update == 4) {
+							System.out.println("\n============================================================");
+							System.out.print("수정할 Seller Id를 입력해주세요 : ");
+							String sellerId = br.readLine();
+	
+							boolean result = bc.getSellerIdStart(sellerId);
+	
+							if (result == true) {
+								System.out.print("수정할 판매자의 이름을 입력해주세요 : ");
+								String sellerName = br.readLine();
+								System.out.print("수정할 판매자의 휴대폰 번호를 입력해주세요 : ");
+								String phone = br.readLine();
+	
+								System.out.println();
+								bc.updateSeller(sellerId, sellerName, phone);
+							} else {
+								System.out.println();
+								System.out.println("\n해당 Seller Id는 없습니다");
 							}
 						} else {
-							System.out.println("\n해당 App Id는 없습니다");
+							System.out.println("\n잘못 입력하셨습니다");
 						}
-					} else if (update == 2) {
-						System.out.println("\n============================================================");
-						System.out.print("수정할 Building Id를 입력해주세요 : ");
-						String buildingId = br.readLine();
-
-						boolean result = bc.getBuildingIdStart(buildingId);
-
-						if (result == true) {
-							System.out.print("수정할 건물의 지역을 입력해주세요 : ");
-							String region = br.readLine();
-							System.out.print("수정할 건물의 주소를 입력해주세요 : ");
-							String address = br.readLine();
-							System.out.print("수정할 건물의 유형을 입력해주세요(원룸, 오피스텔, 전원주택) : ");
-							String type = br.readLine();
-
-							System.out.println();
-							bc.updateBuilding(buildingId, region, address, type);
-						} else {
-							System.out.println("\n해당 Building Id는 없습니다");
-						}
-					} else if (update == 3) {
-						System.out.println("\n============================================================");
-						System.out.print("수정할 App Id를 입력해주세요 : ");
-						String appId = br.readLine();
-
-						boolean result = bc.getAppIdPriceStart(appId);
-
-						if (result == true) {
-							int deposit = 0;
-							int monthly_rent = 0;
-							int trade_price = 0;
-							String trade_type = bc.getAppIdContent(appId).getTradeType();
-							
-							System.out.println("해당 App Id의 가격 유형은 " + trade_type + "입니다");
-							
-							if(trade_type.equals("월세")) {
-								System.out.print("수정할 건물의 보증금의 액수를 입력해주세요(단위:만원) : ");
-								deposit = Integer.parseInt(br.readLine());
-								System.out.print("수정할 건물의 월세의 액수 입력해주세요(단위:만원) : ");
-								monthly_rent = Integer.parseInt(br.readLine());	
-							}else if(trade_type.equals("전세")) {
-								System.out.print("수정할 건물의 보증금의 액수를 입력해주세요(단위:만원) : ");
-								deposit = Integer.parseInt(br.readLine());
-							}else if(trade_type.equals("매매")) {
-								System.out.print("수정할 건물의 매매가의 액수를 입력해주세요(단위:만원) : ");
-								trade_price = Integer.parseInt(br.readLine());
-							}else {
-								System.out.println("지원하지 않는 매물 유형입니다");
-							}
-							
-							System.out.println();
-							bc.updatePrice(appId, deposit, monthly_rent, trade_price);
-						} else {
-							System.out.println("\n해당 App Id는 없습니다");
-						}
-					} else if (update == 4) {
-						System.out.println("\n============================================================");
-						System.out.print("수정할 Seller Id를 입력해주세요 : ");
-						String sellerId = br.readLine();
-
-						boolean result = bc.getSellerIdStart(sellerId);
-
-						if (result == true) {
-							System.out.print("수정할 판매자의 이름을 입력해주세요 : ");
-							String sellerName = br.readLine();
-							System.out.print("수정할 판매자의 휴대폰 번호를 입력해주세요 : ");
-							String phone = br.readLine();
-
-							System.out.println();
-							bc.updateSeller(sellerId, sellerName, phone);
-						} else {
-							System.out.println();
-							System.out.println("\n해당 Seller Id는 없습니다");
-						}
-					} else {
-						System.out.println("\n잘못 입력하셨습니다");
 					}
-
 				} else if (inputNum == 4) {
 					System.out.println("\n============================================================");
 					System.out.println("1. 매물            2. 판매자");
@@ -456,11 +445,13 @@ public class Start {
 						}
 					}
 				} else if (inputNum == 6) {
-					System.out.println("\n안녕히 가세요! 로그아웃합니다.\n");
+					System.out.println("\n안녕히가세요! 로그아웃합니다.\n");
+					Log.logOut(nickName);
+					trigger = false;
 					start();
 					
 				} else if (inputNum == 0) {
-					System.out.println("\n안녕히 가세요! 직빵 플랫폼 종료합니다.");
+					System.out.println("\n안녕히가세요! 직빵 플랫폼 종료합니다.");
 					Log.serviceClose(nickName);
 					trigger = false;
 				}
@@ -475,6 +466,40 @@ public class Start {
 			}
 
 		}
+	}
+
+	public static void start() {
+
+		nickName = null;
+		pw = null;
+		trigger = false;
+		
+		System.out.println("직빵에 오신걸 환영합니다");
+		System.out.print("닉네임을 적어주세요 : ");
+		try {
+			nickName = br.readLine();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		System.out.print("비밀번호를 적어주세요 : ");
+		try {
+			pw = br.readLine();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+		
+		boolean loggedIn = bc.logIn(nickName, pw);
+		
+		if(!(loggedIn)) {
+			System.out.println("\n없는 계정입니다\n");
+			start();
+		} else {
+			trigger = true;
+			Log.inputName(nickName);
+			System.out.println("\nWelcone " + nickName + "!\n");
+			loggedInPage(nickName, pw, bc, br);
+		}
+		
 	}
 
 }

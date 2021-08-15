@@ -12,9 +12,14 @@ public class Log {
 		logger.info("서비스 실행");
 	}
 	
-	// 이름 입력
+	// 로그인
 	public static void inputName(String name) {
 		logger.info(name + "님이 들어오셨습니다");
+	}
+	
+	// 로그아웃
+	public static void logOut(String nickName) {
+		logger.info(nickName + "님이 로그아웃했습니다");
 	}
 	
 	// 서비스 종료
@@ -22,28 +27,28 @@ public class Log {
 		logger.info(name + "님이 서비스를 종료하셨습니다");
 	}
 
-	// Buildingupdate 성공, 실패시 메시지 출력 -
+	// BuildingUpdate 성공, 실패시 메시지 출력 -
 	public static void updateBuildingView(boolean result, String buildingId) {
 		if (result == true) {
 			logger.info("요청하신 " + buildingId + "의 region, address, building_type 수정 완료");
 		}
 	}
 
-	// Priceupdate 성공, 실패시 메시지 출력 -
+	// PriceUpdate 성공, 실패시 메시지 출력 -
 	public static void updatePriceView(boolean result, String appId) {
 		if (result == true) {
 			logger.info("요청하신 " + appId + "의 deposit, monthly_rent, trade_price 수정 완료");
 		}
 	}
 
-	// Priceupdate 성공, 실패시 메시지 출력 -
+	// PriceUpdate 성공, 실패시 메시지 출력 -
 	public static void updateSellerView(boolean result, String sellerId) {
 		if (result == true) {
 			logger.info("요청하신 " + sellerId + "의 name, phone 수정 완료");
 		}
 	}
 
-	// TradeTypeupdate 성공, 실패시 메시지 출력 -
+	// TradeTypeUpdate 성공, 실패시 메시지 출력 -
 	public static void updateTradeTypeView(boolean result, String appId) {
 		if (result == true) {
 			logger.info("요청하신 " + appId + "의 trade_type 수정 완료");
@@ -70,4 +75,6 @@ public class Log {
 			logger.info("요청하신 " + Id + " delete 완료");
 		}
 	}
+
+
 }

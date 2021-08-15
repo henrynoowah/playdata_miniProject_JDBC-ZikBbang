@@ -4,11 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import building.exception.NotExistException;
-import building.model.AppDAO;
-import building.model.BuildingDAO;
 import building.model.BuildingService;
-import building.model.PriceDAO;
-import building.model.SellerDAO;
 import building.model.Start;
 import building.model.dto.AppDTO;
 import building.model.dto.BuildingDTO;
@@ -44,7 +40,7 @@ public class BuildingController {
 	// 판매자계정 확인
 	public boolean checkProfile(String nickName, String pw) {
 		try {
-			if(bs.getProfile(nickName, pw).getSellerID() != null) {
+			if(bs.getProfile(nickName, pw).getSellerId() != null) {
 				return true;
 			};
 		} catch (SQLException e) {
