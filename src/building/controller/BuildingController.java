@@ -4,12 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import building.exception.NotExistException;
-import building.model.AppDAO;
-import building.model.BuildingDAO;
 import building.model.BuildingService;
-import building.model.PriceDAO;
-import building.model.SellerDAO;
-import building.model.Start;
 import building.model.dto.AppDTO;
 import building.model.dto.BuildingDTO;
 import building.model.dto.PriceDTO;
@@ -21,7 +16,7 @@ public class BuildingController {
 
 	private static BuildingController instance = new BuildingController();
 	private BuildingService bs = BuildingService.getInstance();
-	
+
 	private BuildingController() {
 	}
 
@@ -29,310 +24,294 @@ public class BuildingController {
 		return instance;
 	}
 
-	// ëª¨ë“  ë§¤ë¬¼ì •ë³´ ê²€ìƒ‰ ë¡œì§
+	// ¸ğµç ¸Å¹°Á¤º¸ °Ë»ö ·ÎÁ÷
 	public void getAllApp() {
 		try {
 			RunningEndView.AppListView(bs.getAllApp());
+			Log.seachAllApp();
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("ëª¨ë“  ë§¤ë¬¼ì •ë³´ ê²€ìƒ‰ì‹œ ì—ëŸ¬ ë°œìƒ");
+			RunningEndView.showError("¸ğµç ¸Å¹°Á¤º¸ °Ë»ö½Ã ¿¡·¯ ¹ß»ı");
 		}
 	}
 
-	// ëª¨ë“  Building ê²€ìƒ‰ ë¡œì§
+	// ¸ğµç Building °Ë»ö ·ÎÁ÷
 	public void getAllBuilding() {
 		try {
 			RunningEndView.AppListView(bs.getAllBuilding());
+			Log.seachAllBuilding();
 		} catch (SQLException s) {
 			s.printStackTrace();
-			RunningEndView.showError("ëª¨ë“  ê±´ë¬¼ì •ë³´ ê²€ìƒ‰ì‹œ ì—ëŸ¬ ë°œìƒ");
+			RunningEndView.showError("¸ğµç °Ç¹°Á¤º¸ °Ë»ö½Ã ¿¡·¯ ¹ß»ı");
 		}
 	}
 
-	// ëª¨ë“  Price ê²€ìƒ‰ ë¡œì§
+	// ¸ğµç Price °Ë»ö ·ÎÁ÷
 	public void getAllPrice() {
 		try {
 			RunningEndView.AppListView(bs.getAllPrice());
+			Log.seachAllPrice();
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("ëª¨ë“  ê°€ê²©ì •ë³´ ê²€ìƒ‰ì‹œ ì—ëŸ¬ ë°œìƒ");
+			RunningEndView.showError("¸ğµç °¡°İÁ¤º¸ °Ë»ö½Ã ¿¡·¯ ¹ß»ı");
 		}
 	}
 
-	// ëª¨ë“  íŒë§¤ì ê²€ìƒ‰ ë¡œì§
+	// ¸ğµç ÆÇ¸ÅÀÚ °Ë»ö ·ÎÁ÷
 	public void getAllSeller() {
 		try {
 			RunningEndView.AppListView(bs.getAllSeller());
+			Log.seachAllSeller();
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("ëª¨ë“  íŒë§¤ìì •ë³´ ê²€ìƒ‰ì‹œ ì—ëŸ¬ ë°œìƒ");
+			RunningEndView.showError("¸ğµç ÆÇ¸ÅÀÚÁ¤º¸ °Ë»ö½Ã ¿¡·¯ ¹ß»ı");
 		}
 	}
 
-	// AppIdë¡œ ë§¤ë¬¼ ì •ë³´ ê²€ìƒ‰
+	// AppId·Î ¸Å¹° Á¤º¸ °Ë»ö
 	public void getAppId(String appId) {
 		try {
 			RunningEndView.AppView(bs.getApp(appId));
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("App Idë¡œ í•´ë‹¹ ë§¤ë¬¼ ê²€ìƒ‰ ì˜¤ë¥˜ ");
+			Log.seachApp();
+		} catch (SQLException s) {
+			RunningEndView.showError("App Id·Î ÇØ´ç ¸Å¹° °Ë»ö ¿À·ù ");
 		} catch (NotExistException e) {
-			e.printStackTrace();
+			RunningEndView.showError("App Id·Î ÇØ´ç ¸Å¹° °Ë»ö ¿À·ù ");
 		}
 	}
-	
-	// AppIdë¡œ ë§¤ë¬¼ ì •ë³´ ë°˜í™˜
+
+	// AppId·Î ¸Å¹° Á¤º¸ ¹İÈ¯
 	public AppDTO getAppIdContent(String appId) {
 		AppDTO app = null;
-		
+
 		try {
 			app = bs.getApp(appId);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("App Idë¡œ í•´ë‹¹ ë§¤ë¬¼ ê²€ìƒ‰ ì˜¤ë¥˜ ");
+		} catch (SQLException s) {
+			RunningEndView.showError("App Id·Î ÇØ´ç ¸Å¹° °Ë»ö ¿À·ù ");
 		} catch (NotExistException e) {
-			e.printStackTrace();
+			RunningEndView.showError("App Id·Î ÇØ´ç ¸Å¹° °Ë»ö ¿À·ù ");
 		}
-		
+
 		return app;
 	}
 
-	// AppIdë¡œ ë§¤ë¬¼ ì •ë³´ ìœ ë¬´ ê²€ìƒ‰
+	// AppId·Î ¸Å¹° Á¤º¸ À¯¹« °Ë»ö
 	public boolean getAppIdStart(String appId) {
 		try {
 			AppDTO app;
-			app = bs.getAppState(appId);
+			app = bs.getApp(appId);
 			if (app != null) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("App Idë¡œ í•´ë‹¹ ë§¤ë¬¼ ê²€ìƒ‰ ì˜¤ë¥˜ ");
+		} catch (SQLException s) {
+			RunningEndView.showError("App Id·Î ÇØ´ç ¸Å¹° °Ë»ö ¿À·ù ");
 		} catch (NotExistException e) {
-			e.printStackTrace();
+			RunningEndView.showError("App Id·Î ÇØ´ç ¸Å¹° °Ë»ö ¿À·ù ");
 		}
 
 		return false;
 	}
 
-	// ê±´ë¬¼ ë§¤ë¬¼ ë²ˆí˜¸ë¡œ ë§¤ë¬¼ ì •ë³´ ê²€ìƒ‰
+	// °Ç¹° ¸Å¹° ¹øÈ£·Î ¸Å¹° Á¤º¸ °Ë»ö
 	public void getBuildingId(String buildingId) {
 		try {
 			RunningEndView.BuildingView(bs.getBuilding(buildingId));
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("Building Idë¡œ í•´ë‹¹ ê±´ë¬¼ ê²€ìƒ‰ ì˜¤ë¥˜ ");
+			Log.seachBuilding();
+		} catch (SQLException s) {
+			RunningEndView.showError("Building Id·Î ÇØ´ç °Ç¹° °Ë»ö ¿À·ù ");
 		}
 	}
 
-	// BuildingIdë¡œ ë§¤ë¬¼ ì •ë³´ ìœ ë¬´ ê²€ìƒ‰
+	// BuildingId·Î ¸Å¹° Á¤º¸ À¯¹« °Ë»ö
 	public boolean getBuildingIdStart(String buildingId) {
 		try {
 			BuildingDTO building = bs.getBuilding(buildingId);
 			if (building != null) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("Building Idë¡œ í•´ë‹¹ ë§¤ë¬¼ ê²€ìƒ‰ ì˜¤ë¥˜ ");
+		} catch (SQLException s) {
+			RunningEndView.showError("Building Id·Î ÇØ´ç ¸Å¹° °Ë»ö ¿À·ù ");
 		}
 
 		return false;
 	}
 
-	// ì§€ì—­ìœ¼ë¡œ Building ì •ë³´ ê²€ìƒ‰
+	// Áö¿ªÀ¸·Î Building Á¤º¸ °Ë»ö
 	public void getRegion(String region) {
 		try {
 			RunningEndView.allRegion(bs.getRegion(region));
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("ì§€ì—­ìœ¼ë¡œ í•´ë‹¹ ê±´ë¬¼ ê²€ìƒ‰ ì˜¤ë¥˜ ");
+			Log.seachRegion();
+		} catch (SQLException s) {
+			RunningEndView.showError("Áö¿ªÀ¸·Î ÇØ´ç °Ç¹° °Ë»ö ¿À·ù ");
 		}
 	}
 
-	// ì§€ì—­ìœ¼ë¡œ ë§¤ë¬¼ ì •ë³´ ìœ ë¬´ ê²€ìƒ‰
+	// Áö¿ªÀ¸·Î ¸Å¹° Á¤º¸ À¯¹« °Ë»ö
 	public boolean getRegionStart(String region) {
 		try {
 			BuildingDTO building = bs.getBuilding(region);
 			if (building != null) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("ì§€ì—­ìœ¼ë¡œ í•´ë‹¹ ë§¤ë¬¼ ê²€ìƒ‰ ì˜¤ë¥˜ ");
+		} catch (SQLException s) {
+			RunningEndView.showError("Áö¿ªÀ¸·Î ÇØ´ç ¸Å¹° °Ë»ö ¿À·ù ");
 		}
 
 		return false;
 	}
 
-	// Building Typeìœ¼ë¡œ Building ì •ë³´ ê²€ìƒ‰
+	// Building TypeÀ¸·Î Building Á¤º¸ °Ë»ö
 	public void getBuildingType(String type) {
 		try {
 			RunningEndView.allBuildingType(bs.getBuildingType(type));
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("Building Typeìœ¼ë¡œ í•´ë‹¹ ê±´ë¬¼ ê²€ìƒ‰ ì˜¤ë¥˜ ");
+			Log.seachBuildingType();
+		} catch (SQLException s) {
+			RunningEndView.showError("Building TypeÀ¸·Î ÇØ´ç °Ç¹° °Ë»ö ¿À·ù ");
 		}
 	}
 
-	// Building Typeìœ¼ë¡œ ë§¤ë¬¼ ì •ë³´ ìœ ë¬´ ê²€ìƒ‰
+	// Building TypeÀ¸·Î ¸Å¹° Á¤º¸ À¯¹« °Ë»ö
 	public boolean getBuildingTypeStart(String type) {
 		try {
 			ArrayList<BuildingDTO> building = bs.getBuildingType(type);
 			if (building != null) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("Building Typeìœ¼ë¡œ í•´ë‹¹ ë§¤ë¬¼ ê²€ìƒ‰ ì˜¤ë¥˜ ");
+		} catch (SQLException s) {
+			RunningEndView.showError("Building TypeÀ¸·Î ÇØ´ç ¸Å¹° °Ë»ö ¿À·ù ");
 		}
 
 		return false;
 	}
 
-	// AppIdë¡œ Price ì •ë³´ ê²€ìƒ‰
+	// AppId·Î Price Á¤º¸ °Ë»ö
 	public void getPrice(String appId) {
 		try {
 			RunningEndView.PriceView(bs.getPrice(appId));
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("App Idë¡œ í•´ë‹¹ ê°€ê²© ê²€ìƒ‰ ì˜¤ë¥˜ ");
+			Log.seachAllPrice();
+		} catch (SQLException s) {
+			RunningEndView.showError("App Id·Î ÇØ´ç °¡°İ °Ë»ö ¿À·ù ");
 		}
 	}
 
-	// AppIdë¡œ ê°€ê²© ì •ë³´ ìœ ë¬´ ê²€ìƒ‰
+	// AppId·Î °¡°İ Á¤º¸ À¯¹« °Ë»ö
 	public boolean getAppIdPriceStart(String appId) {
 		try {
 			PriceDTO app = bs.getPrice(appId);
 			if (app != null) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("App Idë¡œ í•´ë‹¹ ë§¤ë¬¼ ê²€ìƒ‰ ì˜¤ë¥˜ ");
+		} catch (SQLException s) {
+			RunningEndView.showError("App Id·Î ÇØ´ç ¸Å¹° °Ë»ö ¿À·ù ");
 		}
 
 		return false;
 	}
 
-	// ê°€ê²©ëŒ€ë¡œ Price ì •ë³´ ê²€ìƒ‰
+	// °¡°İ´ë·Î Price Á¤º¸ °Ë»ö
 	public void getComeparePrice(String type, int min, int max) {
 		try {
 			if (min <= max) {
 				RunningEndView.ComparePriceView(bs.getComparePrice(type, min, max));
+				Log.seachCompare(type, min, max);
 			} else {
-				System.out.println("ìµœì†Œê°€ê²©ì´ ìµœëŒ€ê°€ê²©ë³´ë‹¤ í´ ìˆ˜ëŠ” ì—†ìŠµë‹ˆë‹¤");
+				System.out.println("ÃÖ¼Ò°¡°İÀÌ ÃÖ´ë°¡°İº¸´Ù Å¬ ¼ö´Â ¾ø½À´Ï´Ù");
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("ê°€ê²©ëŒ€ë¡œ í•´ë‹¹ ê°€ê²© ê²€ìƒ‰ ì˜¤ë¥˜ ");
+		} catch (SQLException s) {
+			RunningEndView.showError("°¡°İ´ë·Î ÇØ´ç °¡°İ °Ë»ö ¿À·ù ");
 		}
 	}
 
-	// SellerIdë¡œ íŒë§¤ì ì •ë³´ ê²€ìƒ‰
+	// SellerId·Î ÆÇ¸ÅÀÚ Á¤º¸ °Ë»ö
 	public void getSellerId(String sellerId) {
 		try {
 			RunningEndView.SellerView(bs.getSeller(sellerId));
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("Seller Idë¡œ í•´ë‹¹ íŒë§¤ì ê²€ìƒ‰ ì˜¤ë¥˜ ");
+			Log.seachSeller();
+		} catch (SQLException s) {
+			RunningEndView.showError("Seller Id·Î ÇØ´ç ÆÇ¸ÅÀÚ °Ë»ö ¿À·ù ");
 		}
 	}
 
-	// SellerIdë¡œ ê°€ê²© ì •ë³´ ìœ ë¬´ ê²€ìƒ‰
+	// SellerId·Î ÆÇ¸ÅÀÚ Á¤º¸ À¯¹« °Ë»ö
 	public boolean getSellerIdStart(String sellerId) {
 		try {
 			SellerDTO seller = bs.getSeller(sellerId);
 			if (seller != null) {
 				return true;
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			RunningEndView.showError("Seller Idë¡œ í•´ë‹¹ ë§¤ë¬¼ ê²€ìƒ‰ ì˜¤ë¥˜ ");
+		} catch (SQLException s) {
+			RunningEndView.showError("Seller Id·Î ÇØ´ç ¸Å¹° °Ë»ö ¿À·ù ");
 		}
 
 		return false;
 	}
 
-	// BuildingIdë¡œ ê±´ë¬¼ ì •ë³´ ìˆ˜ì •
+	// BuildingId·Î °Ç¹° Á¤º¸ ¼öÁ¤
 	public void updateBuilding(String buildingId, String region, String address, String type) {
 		try {
 			boolean r = bs.updateBuilding(buildingId, region, address, type);
 			RunningEndView.updateBuildingView(r, buildingId);
 			Log.updateBuildingView(r, buildingId);
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("building idë¡œ ê±´ë¬¼ ì •ë³´ ë³€ê²½ ì˜¤ë¥˜ ì¬ì‹œë„ í•˜ì„¸ìš”");
-		} catch (NotExistException s) {
-			s.printStackTrace();
-			RunningEndView.showError("building id ì¬ í™•ì¸í›„ ì¬ì‹œë„ í•˜ì„¸ìš”");
+			RunningEndView.showError("building id·Î °Ç¹° Á¤º¸ º¯°æ ¿À·ù Àç½Ãµµ ÇÏ¼¼¿ä");
+		} catch (NotExistException e) {
+			RunningEndView.showError("building id Àç È®ÀÎÈÄ Àç½Ãµµ ÇÏ¼¼¿ä");
 		}
 	}
 
-	// AppIdë¡œ ê°€ê²© ì •ë³´ ìˆ˜ì •
+	// AppId·Î °¡°İ Á¤º¸ ¼öÁ¤
 	public void updatePrice(String appId, int deposit, int monthly_rent, int trade_price) {
 		try {
 			boolean r = bs.updatePrice(appId, deposit, monthly_rent, trade_price);
 			RunningEndView.updatePriceView(r, appId);
 			Log.updatePriceView(r, appId);
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("app idë¡œ ê°€ê²© ì •ë³´ ë³€ê²½ ì˜¤ë¥˜ ì¬ì‹œë„ í•˜ì„¸ìš”");
-		} catch (NotExistException s) {
-			s.printStackTrace();
-			RunningEndView.showError("app id ì¬ í™•ì¸í›„ ì¬ì‹œë„ í•˜ì„¸ìš”");
+			RunningEndView.showError("app id·Î °¡°İ Á¤º¸ º¯°æ ¿À·ù Àç½Ãµµ ÇÏ¼¼¿ä");
+		} catch (NotExistException e) {
+			RunningEndView.showError("app id Àç È®ÀÎÈÄ Àç½Ãµµ ÇÏ¼¼¿ä");
 		}
 	}
 
-	// sellerIdë¡œ íŒë§¤ì ì •ë³´ ìˆ˜ì •
+	// sellerId·Î ÆÇ¸ÅÀÚ Á¤º¸ ¼öÁ¤
 	public void updateSeller(String sellerId, String name, String phone) {
 		try {
 			boolean r = bs.updateSeller(sellerId, name, phone);
 			RunningEndView.updateSellerView(r, sellerId);
 			Log.updateSellerView(r, sellerId);
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("seller idë¡œ íŒë§¤ì ì •ë³´ ë³€ê²½ ì˜¤ë¥˜ ì¬ì‹œë„ í•˜ì„¸ìš”");
-		} catch (NotExistException s) {
-			s.printStackTrace();
-			RunningEndView.showError("seller id ì¬ í™•ì¸í›„ ì¬ì‹œë„ í•˜ì„¸ìš”");
+			RunningEndView.showError("seller id·Î ÆÇ¸ÅÀÚ Á¤º¸ º¯°æ ¿À·ù Àç½Ãµµ ÇÏ¼¼¿ä");
+		} catch (NotExistException e) {
+			RunningEndView.showError("seller id Àç È®ÀÎÈÄ Àç½Ãµµ ÇÏ¼¼¿ä");
 		}
 	}
 
-	// AppIdë¡œ ë§¤ë¬¼ íƒ€ì… ì •ë³´ ìˆ˜ì •
+	// AppId·Î ¸Å¹° Å¸ÀÔ Á¤º¸ ¼öÁ¤
 	public void updateAppTradeType(String appId, String trade_type) {
 		try {
 			boolean r = bs.updateAppTradeType(appId, trade_type);
 			RunningEndView.updateTradeTypeView(r, appId);
 			Log.updateTradeTypeView(r, appId);
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("app idë¡œ ë§¤ë¬¼ ì •ë³´ ë³€ê²½ ì˜¤ë¥˜ ì¬ì‹œë„ í•˜ì„¸ìš”");
-		} catch (NotExistException s) {
-			s.printStackTrace();
-			RunningEndView.showError("app id ì¬ í™•ì¸í›„ ì¬ì‹œë„ í•˜ì„¸ìš”");
+			RunningEndView.showError("app id·Î ¸Å¹° Á¤º¸ º¯°æ ¿À·ù Àç½Ãµµ ÇÏ¼¼¿ä");
+		} catch (NotExistException e) {
+			RunningEndView.showError("app id Àç È®ÀÎÈÄ Àç½Ãµµ ÇÏ¼¼¿ä");
 		}
 	}
 
-	// AppIdë¡œ ì„¸ì…ì ì •ë³´ ìˆ˜ì •
+	// AppId·Î ¼¼ÀÔÀÚ Á¤º¸ ¼öÁ¤
 	public void updateAppTenant(String appId, String tenant) {
 		try {
 			boolean r = bs.updateAppTenant(appId, tenant);
 			RunningEndView.updateTenantView(r, appId);
 			Log.updateTenantView(r, appId);
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("app idë¡œ ì„¸ì…ì ì •ë³´ ë³€ê²½ ì˜¤ë¥˜ ì¬ì‹œë„ í•˜ì„¸ìš”");
-		} catch (NotExistException s) {
-			s.printStackTrace();
-			RunningEndView.showError("app id ì¬ í™•ì¸í›„ ì¬ì‹œë„ í•˜ì„¸ìš”");
+			RunningEndView.showError("app id·Î ¼¼ÀÔÀÚ Á¤º¸ º¯°æ ¿À·ù Àç½Ãµµ ÇÏ¼¼¿ä");
+		} catch (NotExistException e) {
+			RunningEndView.showError("app id Àç È®ÀÎÈÄ Àç½Ãµµ ÇÏ¼¼¿ä");
 		}
 	}
 
-	// ìƒˆë¡œìš´ ë§¤ë¬¼ ì •ë³´(App) ì €ì¥ ë¡œì§
+	// »õ·Î¿î ¸Å¹° Á¤º¸(App) ÀúÀå ·ÎÁ÷
 	public boolean addApp(AppDTO app, BuildingDTO building, PriceDTO price) {
 		boolean result = false;
-		
+
 		try {
 			result = bs.addBuilding(building);
 			result = bs.addPrice(price);
@@ -340,14 +319,13 @@ public class BuildingController {
 			RunningEndView.insertAppView(result, app.getAppID());
 			Log.insertView(result, app.getAppID());
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("ìƒˆë¡œìš´ ë§¤ë¬¼(App) ì €ì¥ì‹œ ì—ëŸ¬ ë°œìƒ");
+			RunningEndView.showError("»õ·Î¿î ¸Å¹°(App) ÀúÀå½Ã ¿¡·¯ ¹ß»ı");
 		}
 
 		return result;
 	}
 
-	// ìƒˆë¡œìš´ ë§¤ë¬¼ ì •ë³´(Building) ì €ì¥ ë¡œì§
+	// »õ·Î¿î ¸Å¹° Á¤º¸(Building) ÀúÀå ·ÎÁ÷
 	public boolean addBuilding(BuildingDTO building) {
 		boolean result = false;
 
@@ -356,13 +334,12 @@ public class BuildingController {
 			RunningEndView.insertBuildingView(result, building.getBuildingID());
 			Log.insertView(result, building.getBuildingID());
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("ìƒˆë¡œìš´ ë§¤ë¬¼(Building) ì €ì¥ì‹œ ì—ëŸ¬ ë°œìƒ");
+			RunningEndView.showError("»õ·Î¿î ¸Å¹°(Building) ÀúÀå½Ã ¿¡·¯ ¹ß»ı");
 		}
 		return result;
 	}
 
-	// ìƒˆë¡œìš´ ë§¤ë¬¼ ì •ë³´(Price) ì €ì¥ ë¡œì§
+	// »õ·Î¿î ¸Å¹° Á¤º¸(Price) ÀúÀå ·ÎÁ÷
 	public boolean addPrice(PriceDTO price) {
 		boolean result = false;
 
@@ -371,13 +348,12 @@ public class BuildingController {
 			RunningEndView.insertPriceView(result, price.getAppID());
 			Log.insertView(result, price.getAppID());
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("ìƒˆë¡œìš´ ë§¤ë¬¼(Price) ì €ì¥ì‹œ ì—ëŸ¬ ë°œìƒ");
+			RunningEndView.showError("»õ·Î¿î ¸Å¹°(Price) ÀúÀå½Ã ¿¡·¯ ¹ß»ı");
 		}
 		return result;
 	}
 
-	// ìƒˆë¡œìš´ ë§¤ë¬¼ ì •ë³´(Seller) ì €ì¥ ë¡œì§
+	// »õ·Î¿î ¸Å¹° Á¤º¸(Seller) ÀúÀå ·ÎÁ÷
 	public boolean addSeller(SellerDTO seller) {
 		boolean result = false;
 
@@ -386,13 +362,12 @@ public class BuildingController {
 			RunningEndView.insertSellerView(result, seller.getSellerID());
 			Log.insertView(result, seller.getSellerID());
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("ìƒˆë¡œìš´ ë§¤ë¬¼(Seller) ì €ì¥ì‹œ ì—ëŸ¬ ë°œìƒ");
+			RunningEndView.showError("»õ·Î¿î ¸Å¹°(Seller) ÀúÀå½Ã ¿¡·¯ ¹ß»ı");
 		}
 		return result;
 	}
 
-	// Seller ì •ë³´ ì‚­ì œ
+	// Seller Á¤º¸ »èÁ¦
 	public boolean deleteSeller(String sellerId) {
 		boolean result = false;
 
@@ -401,45 +376,41 @@ public class BuildingController {
 			RunningEndView.deleteSellerView(result, sellerId);
 			Log.deleteView(result, sellerId);
 		} catch (SQLException s) {
-			s.printStackTrace();
-			RunningEndView.showError("Seller ì‚­ì œ ì—ëŸ¬ ë°œìƒ");
+			RunningEndView.showError("Seller »èÁ¦ ¿¡·¯ ¹ß»ı");
 		} catch (NotExistException e) {
-			e.printStackTrace();
-			RunningEndView.showError("Seller ì‚­ì œ ì—ëŸ¬ ë°œìƒ");
+			RunningEndView.showError("Seller »èÁ¦ ¿¡·¯ ¹ß»ı");
 		}
 
 		return result;
 	}
 
-	// App ì •ë³´ ì‚­ì œ
+	// App Á¤º¸ »èÁ¦
 	public boolean deleteApp(String appId) {
 		boolean result = false;
 		AppDTO app = null;
-		
+
 		try {
 			app = bs.getApp(appId);
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException s) {
+			RunningEndView.showError("App »èÁ¦ ¿¡·¯ ¹ß»ı");
 		} catch (NotExistException e) {
-			e.printStackTrace();
+			RunningEndView.showError("App »èÁ¦ ¿¡·¯ ¹ß»ı");
 		}
-		
-		if(app != null) {
+
+		if (app != null) {
 			try {
 				result = bs.deleteApp(appId);
-				if(result) {
-					result = bs.deleteBuilding(app.getBuildingID());	
+				if (result) {
+					result = bs.deleteBuilding(app.getBuildingID());
 					result = bs.deletePrice(appId);
 				}
 				RunningEndView.deleteAppView(result, appId);
 				Log.deleteView(result, appId);
 			} catch (SQLException s) {
-				s.printStackTrace();
-				RunningEndView.showError("App ì‚­ì œ ì—ëŸ¬ ë°œìƒ");
-			}catch (NotExistException e) {
-				e.printStackTrace();
-				RunningEndView.showError("App ì‚­ì œ ì—ëŸ¬ ë°œìƒ");
-			}	
+				RunningEndView.showError("App »èÁ¦ ¿¡·¯ ¹ß»ı");
+			} catch (NotExistException e) {
+				RunningEndView.showError("App »èÁ¦ ¿¡·¯ ¹ß»ı");
+			}
 		}
 		return result;
 	}

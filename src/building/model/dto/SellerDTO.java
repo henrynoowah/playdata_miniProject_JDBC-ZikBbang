@@ -41,11 +41,11 @@ public class SellerDTO {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("[ì§ë¹µ ë“±ë¡ë²ˆí˜¸: ");
+		builder.append("[Á÷»§ µî·Ï¹øÈ£: ");
 		builder.append(sellerID);
-		builder.append("], [ê±´ë¬¼ ë§¤ë¬¼ ë²ˆí˜¸: ");
+		builder.append("], [°Ç¹° ¸Å¹° ¹øÈ£: ");
 		builder.append(name);
-		builder.append("], [ë§¤ë¬¼ íƒ€ì…: ");
+		builder.append("], [¸Å¹° Å¸ÀÔ: ");
 		builder.append(phone + "]");
 		
 		return builder.toString();

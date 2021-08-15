@@ -2,72 +2,125 @@ package log4j;
 
 import org.apache.log4j.Logger;
 
-import building.controller.BuildingController;
-
 public class Log {
 	static Logger logger = Logger.getLogger("log4.Log");
 	
-	// ì„œë¹„ìŠ¤ ì‹œì‘
+	// ¼­ºñ½º ½ÃÀÛ
 	public static void welcome() {
-		logger.info("ì„œë¹„ìŠ¤ ì‹¤í–‰");
+		logger.info("¼­ºñ½º ½ÇÇà");
 	}
 	
-	// ì´ë¦„ ì…ë ¥
+	// ÀÌ¸§ ÀÔ·Â
 	public static void inputName(String name) {
-		logger.info(name + "ë‹˜ì´ ë“¤ì–´ì˜¤ì…¨ìŠµë‹ˆë‹¤");
+		logger.info(name + "´ÔÀÌ µé¾î¿À¼Ì½À´Ï´Ù");
 	}
 	
-	// ì„œë¹„ìŠ¤ ì¢…ë£Œ
+	// ¼­ºñ½º Á¾·á
 	public static void serviceClose(String name) {
-		logger.info(name + "ë‹˜ì´ ì„œë¹„ìŠ¤ë¥¼ ì¢…ë£Œí•˜ì…¨ìŠµë‹ˆë‹¤");
+		logger.info(name + "´ÔÀÌ ¼­ºñ½º¸¦ Á¾·áÇÏ¼Ì½À´Ï´Ù");
+	}
+	
+	// °Ë»ö - ¸ğµç ¸Å¹°
+	public static void seachAllApp() {
+		logger.info("¸ğµç ¸Å¹°À» °Ë»öÇÏ¿´½À´Ï´Ù");
+	}
+	
+	// °Ë»ö - ¸ğµç °Ç¹°
+	public static void seachAllBuilding() {
+		logger.info("¸ğµç °Ç¹°À» °Ë»öÇÏ¿´½À´Ï´Ù");
+	}
+	
+	// °Ë»ö - ¸ğµç °¡°İ
+	public static void seachAllPrice() {
+		logger.info("¸ğµç °¡°İÀ» °Ë»öÇÏ¿´½À´Ï´Ù");
+	}
+	
+	// °Ë»ö - ¸ğµç ÆÇ¸ÅÀÚ
+	public static void seachAllSeller() {
+		logger.info("¸ğµç ÆÇ¸ÅÀÚ¸¦ °Ë»öÇÏ¿´½À´Ï´Ù");
+	}
+	
+	// App Id·Î ¸Å¹° °Ë»ö
+	public static void seachApp() {
+		logger.info("App Id·Î ¸Å¹°À» °Ë»öÇÏ¿´½À´Ï´Ù");
+	}
+	
+	// Building Id·Î ¸Å¹° °Ë»ö
+	public static void seachBuilding() {
+		logger.info("Building Id·Î °Ç¹°À» °Ë»öÇÏ¿´½À´Ï´Ù");
+	}
+	
+	// Áö¿ªÀ¸·Î ¸Å¹° °Ë»ö
+	public static void seachRegion() {
+		logger.info("Áö¿ªÀ¸·Î °Ç¹°À» °Ë»öÇÏ¿´½À´Ï´Ù");
+	}
+	
+	// °Ç¹° À¯ÇüÀ¸·Î ¸Å¹° °Ë»ö
+	public static void seachBuildingType() {
+		logger.info("°Ç¹° À¯ÇüÀ¸·Î °Ç¹°À» °Ë»öÇÏ¿´½À´Ï´Ù");
+	}
+		
+	// App Id·Î ¸Å¹° °Ë»ö
+	public static void seachPrice() {
+		logger.info("App Id·Î °¡°İÀ» °Ë»öÇÏ¿´½À´Ï´Ù");
+	}
+	
+	// App Id·Î ¸Å¹° °Ë»ö
+	public static void seachCompare(String type, int min, int max) {
+		logger.info(min + " ~ " + max + "»çÀÌ(´ÜÀ§ : ¸¸¿ø)ÀÇ " + type + "¸¦(À») °Ë»öÇÏ¿´½À´Ï´Ù");
+	}
+	
+	// Seller Id·Î ¸Å¹° °Ë»ö
+	public static void seachSeller() {
+		logger.info("Seller Id·Î ÆÇ¸ÅÀÚ¸¦ °Ë»öÇÏ¿´½À´Ï´Ù");
 	}
 
-	// Buildingupdate ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// Buildingupdate ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void updateBuildingView(boolean result, String buildingId) {
 		if (result == true) {
-			logger.info("ìš”ì²­í•˜ì‹  " + buildingId + "ì˜ region, address, building_type ìˆ˜ì • ì™„ë£Œ");
+			logger.info("¿äÃ»ÇÏ½Å [Building Id : " + buildingId + "] region, address, building_type ¼öÁ¤ ¿Ï·á");
 		}
 	}
 
-	// Priceupdate ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// Priceupdate ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void updatePriceView(boolean result, String appId) {
 		if (result == true) {
-			logger.info("ìš”ì²­í•˜ì‹  " + appId + "ì˜ deposit, monthly_rent, trade_price ìˆ˜ì • ì™„ë£Œ");
+			logger.info("¿äÃ»ÇÏ½Å [Á÷»§¹øÈ£ : " + appId + "] deposit, monthly_rent, trade_price ¼öÁ¤ ¿Ï·á");
 		}
 	}
 
-	// Priceupdate ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// Sellerupdate ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void updateSellerView(boolean result, String sellerId) {
 		if (result == true) {
-			logger.info("ìš”ì²­í•˜ì‹  " + sellerId + "ì˜ name, phone ìˆ˜ì • ì™„ë£Œ");
+			logger.info("¿äÃ»ÇÏ½Å [Seller Id : " + sellerId + "] name, phone ¼öÁ¤ ¿Ï·á");
 		}
 	}
 
-	// TradeTypeupdate ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// TradeTypeupdate ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void updateTradeTypeView(boolean result, String appId) {
 		if (result == true) {
-			logger.info("ìš”ì²­í•˜ì‹  " + appId + "ì˜ trade_type ìˆ˜ì • ì™„ë£Œ");
+			logger.info("¿äÃ»ÇÏ½Å [Á÷»§¹øÈ£ : " + appId + "] trade_type ¼öÁ¤ ¿Ï·á");
 		}
 	}
 
-	// Tenantupdate ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// Tenantupdate ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void updateTenantView(boolean result, String appId) {
 		if (result == true) {
-			logger.info("ìš”ì²­í•˜ì‹  " + appId + "ì˜ tenant ìˆ˜ì • ì™„ë£Œ");
+			logger.info("¿äÃ»ÇÏ½Å [Á÷»§¹øÈ£ : " + appId + "] tenant ¼öÁ¤ ¿Ï·á");
 		}
 	}
 
-	// insert ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// insert ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void insertView(boolean result, String Id) {
 		if (result == true) {
-			logger.info("ìš”ì²­í•˜ì‹  " + Id + " insert ì™„ë£Œ");
+			logger.info("¿äÃ»ÇÏ½Å [Á÷»§¹øÈ£ : " + Id + "] insert ¿Ï·á");
 		}
 	}
 
-	// delete ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// delete ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void deleteView(boolean result, String Id) {
 		if (result == true) {
-			logger.info("ìš”ì²­í•˜ì‹  " + Id + " delete ì™„ë£Œ");
+			logger.info("¿äÃ»ÇÏ½Å [Á÷»§¹øÈ£ : " + Id + "] delete ¿Ï·á");
 		}
 	}
 }

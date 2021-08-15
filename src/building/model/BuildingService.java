@@ -12,169 +12,160 @@ import building.model.dto.SellerDTO;
 public class BuildingService {
 
 	private static BuildingService instance = new BuildingService();
+	private static AppDAO aIns = AppDAO.getInstance();
+	private static BuildingDAO bIns = BuildingDAO.getInstance();
+	private static PriceDAO pIns = PriceDAO.getInstance();
+	private static SellerDAO sIns = SellerDAO.getInstance();
 
-	private BuildingService() {
-	}
+	private BuildingService() {}
 
 	public static BuildingService getInstance() {
 		return instance;
 	}
 
-	// ëª¨ë“  ë§¤ë¬¼ì •ë³´ ë°˜í™˜
+	// ¸ðµç ¸Å¹°Á¤º¸ ¹ÝÈ¯
 	public ArrayList<AppDTO> getAllApp() throws SQLException {
-		return AppDAO.getAllApp();
+		return aIns.getAllApp();
 	}
 
-	// Appidë¡œ ì¡´ìž¬ ìœ ë¬´ ê²€ìƒ‰í•˜ëŠ” ë©”ì†Œë“œ
+	// Appid·Î Á¸Àç À¯¹« °Ë»öÇÏ´Â ¸Þ¼Òµå
 	public AppDTO getApp(String appId) throws SQLException, NotExistException {
-		AppDTO app = AppDAO.getApp(appId);
-		if (app == null) {
-			throw new NotExistException("ê²€ìƒ‰í•˜ëŠ” App Idê°€ ë¯¸ ì¡´ìž¬í•©ë‹ˆë‹¤.");
-		}
-		return app;
-	}
-	
-	// Appidë¡œ ì¡´ìž¬ ìœ ë¬´ ê²€ìƒ‰í•˜ëŠ” ë©”ì†Œë“œ
-	public AppDTO getAppState(String appId) throws SQLException, NotExistException {
-		AppDTO app = AppDAO.getApp(appId);
-		return app;
+		return aIns.getApp(appId);
 	}
 
 	// Building - CRUD
 	public void notExistBuilding(String buildingId) throws NotExistException, SQLException {
-		BuildingDTO building = BuildingDAO.getBuilding(buildingId);
+		BuildingDTO building = bIns.getBuilding(buildingId);
 		if (building == null) {
-//			throw new NotExistException("ê²€ìƒ‰í•˜ëŠ” App Idê°€ ë¯¸ ì¡´ìž¬í•©ë‹ˆë‹¤.");
-			System.out.println("ê²€ìƒ‰í•˜ëŠ” App Idê°€ ë¯¸ ì¡´ìž¬í•©ë‹ˆë‹¤.");
+//			throw new NotExistException("°Ë»öÇÏ´Â App Id°¡ ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
+			System.out.println("°Ë»öÇÏ´Â Building Id°¡ ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
 		}
 	}
 
 	public boolean addBuilding(BuildingDTO building) throws SQLException {
-		return BuildingDAO.addBuilding(building);
+		return bIns.addBuilding(building);
 	}
 
 	public boolean updateBuilding(String buildingId, String region, String address, String type)
 			throws SQLException, NotExistException {
 		notExistBuilding(buildingId);
-		return BuildingDAO.updateBuilding(buildingId, region, address, type);
+		return bIns.updateBuilding(buildingId, region, address, type);
 	}
 
 	public boolean deleteBuilding(String buildingId) throws SQLException, NotExistException {
 		notExistBuilding(buildingId);
-		return BuildingDAO.deleteBuilding(buildingId);
+		return bIns.deleteBuilding(buildingId);
 	}
 
 	public BuildingDTO getBuilding(String buildingId) throws SQLException {
-		return BuildingDAO.getBuilding(buildingId);
+		return bIns.getBuilding(buildingId);
 	}
-	
+
 	public ArrayList<BuildingDTO> getRegion(String buildingId) throws SQLException {
-		return BuildingDAO.getRegion(buildingId);
+		return bIns.getRegion(buildingId);
 	}
-	
+
 	public ArrayList<BuildingDTO> getBuildingType(String buildingId) throws SQLException {
-		return BuildingDAO.getBuildingType(buildingId);
+		return bIns.getBuildingType(buildingId);
 	}
 
 	public ArrayList<BuildingDTO> getAllBuilding() throws SQLException {
-		return BuildingDAO.getAllBuilding();
+		return bIns.getAllBuilding();
 	}
 
 	// Price - CRUD
 	public void notExistPrice(String appId) throws NotExistException, SQLException {
-		PriceDTO price = PriceDAO.getPrice(appId);
+		PriceDTO price = pIns.getPrice(appId);
 		if (price == null) {
-//			throw new NotExistException("ê²€ìƒ‰í•˜ëŠ” App Idê°€ ë¯¸ ì¡´ìž¬í•©ë‹ˆë‹¤.");
-			System.out.println("ê²€ìƒ‰í•˜ëŠ” App Idê°€ ë¯¸ ì¡´ìž¬í•©ë‹ˆë‹¤.");
+//			throw new NotExistException("°Ë»öÇÏ´Â App Id°¡ ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
+			System.out.println("°Ë»öÇÏ´Â App Id°¡ ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
 		}
 	}
 
 	public boolean addPrice(PriceDTO price) throws SQLException {
-		return PriceDAO.addPrice(price);
+		return pIns.addPrice(price);
 	}
-	
+
 	public ArrayList<PriceDTO> getComparePrice(String type, int min, int max) throws SQLException {
-		return PriceDAO.getComparePrice(type, min, max);
+		return pIns.getComparePrice(type, min, max);
 	}
 
 	public boolean updatePrice(String appId, int deposit, int monthly_rent, int trade_price)
 			throws SQLException, NotExistException {
 		notExistPrice(appId);
-		return PriceDAO.updatePrice(appId, deposit, monthly_rent, trade_price);
+		return pIns.updatePrice(appId, deposit, monthly_rent, trade_price);
 	}
 
 	public boolean deletePrice(String appId) throws SQLException, NotExistException {
 		notExistPrice(appId);
-		return PriceDAO.deletePrice(appId);
+		return pIns.deletePrice(appId);
 	}
 
 	public PriceDTO getPrice(String appId) throws SQLException {
-		return PriceDAO.getPrice(appId);
+		return pIns.getPrice(appId);
 	}
 
 	public ArrayList<PriceDTO> getAllPrice() throws SQLException {
-		return PriceDAO.getAllPrice();
+		return pIns.getAllPrice();
 	}
 
 	// Seller - CRUD
 	public void notExistSeller(String sellerId) throws NotExistException, SQLException {
-		SellerDTO seller = SellerDAO.getSeller(sellerId);
+		SellerDTO seller = sIns.getSeller(sellerId);
 		if (seller == null) {
-//			throw new NotExistException("ê²€ìƒ‰í•˜ëŠ” Seller Idê°€ ë¯¸ ì¡´ìž¬í•©ë‹ˆë‹¤.");
-			System.out.println("ê²€ìƒ‰í•˜ëŠ” Seller Idê°€ ë¯¸ ì¡´ìž¬í•©ë‹ˆë‹¤.");
+//			throw new NotExistException("°Ë»öÇÏ´Â Seller Id°¡ ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
+			System.out.println("°Ë»öÇÏ´Â Seller Id°¡ ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
 		}
 	}
 
 	public boolean addSeller(SellerDTO sellerId) throws SQLException {
-		return SellerDAO.addSeller(sellerId);
+		return sIns.addSeller(sellerId);
 	}
 
-	public boolean updateSeller(String sellerId, String name, String phone)
-			throws SQLException, NotExistException {
+	public boolean updateSeller(String sellerId, String name, String phone) throws SQLException, NotExistException {
 		notExistSeller(sellerId);
-		return SellerDAO.updateSeller(sellerId, name, phone);
+		return sIns.updateSeller(sellerId, name, phone);
 	}
 
 	public boolean deleteSeller(String recipientId) throws SQLException, NotExistException {
 		notExistSeller(recipientId);
-		return SellerDAO.deleteSeller(recipientId);
+		return sIns.deleteSeller(recipientId);
 	}
 
 	public SellerDTO getSeller(String recipientId) throws SQLException {
-		return SellerDAO.getSeller(recipientId);
+		return sIns.getSeller(recipientId);
 	}
 
 	public ArrayList<SellerDTO> getAllSeller() throws SQLException {
-		return SellerDAO.getAllSeller();
+		return sIns.getAllSeller();
 	}
 
 	// AppUserDAO - CRUD
 	public void notExistApp(String appId) throws NotExistException, SQLException {
-		AppDTO AppUser = AppDAO.getApp(appId);
+		AppDTO AppUser = aIns.getApp(appId);
 		if (AppUser == null) {
-//			throw new NotExistException("ê²€ìƒ‰í•˜ëŠ” App Idê°€ ë¯¸ ì¡´ìž¬í•©ë‹ˆë‹¤.");
-			System.out.println("ê²€ìƒ‰í•˜ëŠ” App Idê°€ ë¯¸ ì¡´ìž¬í•©ë‹ˆë‹¤.");
+//			throw new NotExistException("°Ë»öÇÏ´Â App Id°¡ ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
+			System.out.println("°Ë»öÇÏ´Â App Id°¡ ¹Ì Á¸ÀçÇÕ´Ï´Ù.");
 		}
 	}
 
 	public boolean addApp(AppDTO app) throws SQLException {
-		return AppDAO.addApp(app);
+		return aIns.addApp(app);
 	}
 
-	public boolean updateAppTradeType(String appId, String trade_type)
-			throws SQLException, NotExistException {
+	public boolean updateAppTradeType(String appId, String trade_type) throws SQLException, NotExistException {
 		notExistApp(appId);
-		return AppDAO.updateAppTradeType(appId, trade_type);
+		return aIns.updateAppTradeType(appId, trade_type);
 	}
 
 	public boolean updateAppTenant(String appId, String tenant) throws SQLException, NotExistException {
 		notExistApp(appId);
-		return AppDAO.updateAppTenant(appId, tenant);
+		return aIns.updateAppTenant(appId, tenant);
 	}
 
 	public boolean deleteApp(String appId) throws SQLException, NotExistException {
 		notExistApp(appId);
-		return AppDAO.deleteApp(appId);
+		return aIns.deleteApp(appId);
 	}
 
 }

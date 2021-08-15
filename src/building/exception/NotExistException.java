@@ -1,6 +1,6 @@
-/* í”„ë¡œì íŠ¸, ê¸°ë¶€ì(Activist), ëŒ€ìƒì(Recipient)ê°€ ë¯¸ ì¡´ì¬í•  ê²½ìš° ë°œìƒ
+/* ÇÁ·ÎÁ§Æ®, ±âºÎÀÚ(Activist), ´ë»óÀÚ(Recipient)°¡ ¹Ì Á¸ÀçÇÒ °æ¿ì ¹ß»ı
  * 
- *  @ Author ê¹€ í˜œ ê²½
+ *  @ Author ±è Çı °æ
  */
 package building.exception;
 

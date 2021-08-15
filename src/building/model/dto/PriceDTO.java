@@ -51,38 +51,38 @@ public class PriceDTO {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("[ì§ë¹µ ë“±ë¡ë²ˆí˜¸: ");
+		builder.append("[Á÷»§ µî·Ï¹øÈ£: ");
 		builder.append(appID);
 		if(deposit == 0 && monthlyRent == 0) {
 			if(tradePrice >= 10000) {
 				double price = (double)tradePrice/10000;
-				builder.append("], [ë§¤ë§¤ê°€: ");
-				builder.append(price + "ì–µì›]");
+				builder.append("], [¸Å¸Å°¡: ");
+				builder.append(price + "¾ï¿ø]");
 			}else {
-				builder.append("], [ë§¤ë§¤ê°€: ");
-				builder.append(tradePrice + "ë§Œì›]");
+				builder.append("], [¸Å¸Å°¡: ");
+				builder.append(tradePrice + "¸¸¿ø]");
 			}
 		}else if(monthlyRent == 0 && tradePrice == 0) {
 			if(deposit >= 10000) {
 				double price = (double)deposit/10000;
-				builder.append("], [ë³´ì¦ê¸ˆ: ");
-				builder.append(price + "ì–µì›]");
+				builder.append("], [º¸Áõ±İ: ");
+				builder.append(price + "¾ï¿ø]");
 			}else {
-				builder.append("], [ë³´ì¦ê¸ˆ: ");
-				builder.append(deposit + "ë§Œì›]");
+				builder.append("], [º¸Áõ±İ: ");
+				builder.append(deposit + "¸¸¿ø]");
 			}
 		}else{
 			if(deposit >= 10000) {
 				double price = (double)deposit/10000;
-				builder.append("], [ë³´ì¦ê¸ˆ: ");
-				builder.append(price + "ì–µì›]");
-				builder.append(", [ì›”ì„¸: ");
-				builder.append(monthlyRent + "ë§Œì›]");
+				builder.append("], [º¸Áõ±İ: ");
+				builder.append(price + "¾ï¿ø]");
+				builder.append(", [¿ù¼¼: ");
+				builder.append(monthlyRent + "¸¸¿ø]");
 			}else {
-				builder.append("], [ë³´ì¦ê¸ˆ: ");
-				builder.append(deposit + "ë§Œì›]");
-				builder.append(", [ì›”ì„¸: ");
-				builder.append(monthlyRent + "ë§Œì›]");
+				builder.append("], [º¸Áõ±İ: ");
+				builder.append(deposit + "¸¸¿ø]");
+				builder.append(", [¿ù¼¼: ");
+				builder.append(monthlyRent + "¸¸¿ø]");
 			}
 		}
 		

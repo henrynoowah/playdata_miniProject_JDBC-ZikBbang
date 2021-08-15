@@ -28,7 +28,7 @@ public class DBUtil {
 	}
 
 
-	//connection ê°ì²´ í•„ìš”ì‹œ ë§ˆë‹¤ í˜¸ì¶œë˜ëŠ” ë©”ì†Œë“œ
+	//connection °´Ã¼ ÇÊ¿ä½Ã ¸¶´Ù È£ÃâµÇ´Â ¸Ş¼Òµå
 	public static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(dbinfo.getProperty("jdbc.url"),dbinfo.getProperty("jdbc.id"),dbinfo.getProperty("jdbc.pw"));
 		

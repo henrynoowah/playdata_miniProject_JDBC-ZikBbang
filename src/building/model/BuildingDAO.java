@@ -13,9 +13,17 @@ import building.model.util.DBUtil;
 public class BuildingDAO {
 
 	private static Properties sql = DBUtil.getSql();
+	
+	private static BuildingDAO instance = new BuildingDAO();
 
-	// ëª¨ë“  Buildingì •ë³´ ë°˜í™˜
-	public static ArrayList<BuildingDTO> getAllBuilding() throws SQLException {
+	private BuildingDAO() {}
+
+	public static BuildingDAO getInstance() {
+		return instance;
+	}
+
+	// ¸ğµç BuildingÁ¤º¸ ¹İÈ¯
+	public ArrayList<BuildingDTO> getAllBuilding() throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -25,8 +33,8 @@ public class BuildingDAO {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("getAllBuilding"));
 			rset = pstmt.executeQuery();
-
 			list = new ArrayList<BuildingDTO>();
+
 			while (rset.next()) {
 				list.add(new BuildingDTO(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4)));
 			}
@@ -36,8 +44,8 @@ public class BuildingDAO {
 		return list;
 	}
 
-	// BuildingIdë¡œ ê²€ìƒ‰í•œ ê²°ê³¼ ë°˜í™˜
-	public static BuildingDTO getBuilding(String buildingId) throws SQLException {
+	// BuildingId·Î °Ë»öÇÑ °á°ú ¹İÈ¯
+	public BuildingDTO getBuilding(String buildingId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -48,6 +56,7 @@ public class BuildingDAO {
 			pstmt = con.prepareStatement(sql.getProperty("getBuilding"));
 			pstmt.setString(1, buildingId);
 			rset = pstmt.executeQuery();
+
 			if (rset.next()) {
 				building = new BuildingDTO(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4));
 			}
@@ -57,8 +66,8 @@ public class BuildingDAO {
 		return building;
 	}
 
-	// ì§€ì—­ìœ¼ë¡œ í•´ë‹¹ Buildingì˜ ëª¨ë“  ì •ë³´ ë°˜í™˜
-	public static ArrayList<BuildingDTO> getRegion(String buildingId) throws SQLException {
+	// Áö¿ªÀ¸·Î ÇØ´ç BuildingÀÇ ¸ğµç Á¤º¸ ¹İÈ¯
+	public ArrayList<BuildingDTO> getRegion(String buildingId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -80,8 +89,8 @@ public class BuildingDAO {
 		return list;
 	}
 
-	// Building Typeìœ¼ë¡œ í•´ë‹¹ Buildingì˜ ëª¨ë“  ì •ë³´ ë°˜í™˜
-	public static ArrayList<BuildingDTO> getBuildingType(String buildingId) throws SQLException {
+	// Building TypeÀ¸·Î ÇØ´ç BuildingÀÇ ¸ğµç Á¤º¸ ¹İÈ¯
+	public ArrayList<BuildingDTO> getBuildingType(String buildingId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -103,8 +112,8 @@ public class BuildingDAO {
 		return list;
 	}
 
-	// ë§¤ë¬¼ ì •ë³´ ì €ì¥
-	public static boolean addBuilding(BuildingDTO building) throws SQLException {
+	// ¸Å¹° Á¤º¸ ÀúÀå
+	public boolean addBuilding(BuildingDTO building) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
@@ -126,8 +135,8 @@ public class BuildingDAO {
 		return false;
 	}
 
-	// Building ìˆ˜ì •
-	public static boolean updateBuilding(String buildingId, String region, String address, String type)
+	// Building ¼öÁ¤
+	public boolean updateBuilding(String buildingId, String region, String address, String type)
 			throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -142,6 +151,7 @@ public class BuildingDAO {
 			pstmt.setString(4, buildingId);
 
 			int result = pstmt.executeUpdate();
+
 			if (result == 1) {
 				return true;
 			}
@@ -151,15 +161,17 @@ public class BuildingDAO {
 		return false;
 	}
 
-	// BuildingIdë¡œ í•´ë‹¹ Building ì •ë³´ ì‚­ì œ
-	public static boolean deleteBuilding(String buildingId) throws SQLException {
+	// BuildingId·Î ÇØ´ç Building Á¤º¸ »èÁ¦
+	public boolean deleteBuilding(String buildingId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("deleteBuilding"));
 			pstmt.setString(1, buildingId);
+
 			int result = pstmt.executeUpdate();
+
 			if (result == 1) {
 				return true;
 			}

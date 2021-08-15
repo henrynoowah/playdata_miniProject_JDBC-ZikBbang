@@ -11,56 +11,70 @@ import building.model.dto.AppDTO;
 import building.model.util.DBUtil;
 
 public class AppDAO {
+	
 	private static Properties sql = DBUtil.getSql();
-	//Î™®Îì† Îß§Î¨ºÏ†ïÎ≥¥ Í≤ÄÏÉâ
-	public static ArrayList<AppDTO> getAllApp() throws SQLException{
+	
+	private static AppDAO instance = new AppDAO();
+
+	private AppDAO() {}
+
+	public static AppDAO getInstance() {
+		return instance;
+	}
+
+	// ∏µÁ ∏≈π∞¡§∫∏ ∞Àªˆ
+	public ArrayList<AppDTO> getAllApp() throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<AppDTO> list = null;
-		
-		try{
+
+		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("getAllApp"));
 			rset = pstmt.executeQuery();
-			
+
 			list = new ArrayList<AppDTO>();
-			while(rset.next()){
-				list.add( new AppDTO(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5)) );
+
+			while (rset.next()) {
+				list.add(new AppDTO(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4),
+						rset.getString(5)));
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt, rset);
 		}
 		return list;
 	}
-	
-	//AppIdÎ°ú Í≤ÄÏÉâÌïú Í≤∞Í≥º Î∞òÌôò
-	public static AppDTO getApp(String appId) throws SQLException{
+
+	// AppId∑Œ ∞Àªˆ«— ∞·∞˙ π›»Ø
+	public AppDTO getApp(String appId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		AppDTO app = null;
-		
-		try{
+
+		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("getApp"));
 			pstmt.setString(1, appId);
 			rset = pstmt.executeQuery();
-			
-			while(rset.next()){
-				app = new AppDTO(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4), rset.getString(5));
+
+			while (rset.next()) {
+				app = new AppDTO(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4),
+						rset.getString(5));
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt, rset);
 		}
 		return app;
 	}
-	
-	//Îß§Î¨º Ï†ïÎ≥¥ Ï†ÄÏû•
-	public static boolean addApp(AppDTO app) throws SQLException{
+
+	// ∏≈π∞ ¡§∫∏ ¿˙¿Â
+	public boolean addApp(AppDTO app) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		try{
+
+		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("addApp"));
 			pstmt.setString(1, app.getAppID());
@@ -68,93 +82,102 @@ public class AppDAO {
 			pstmt.setString(3, app.getTradeType());
 			pstmt.setString(4, app.getSellerID());
 			pstmt.setString(5, app.getTenant());
-			
+
 			int result = pstmt.executeUpdate();
-		
-			if(result == 1){
+
+			if (result == 1) {
 				return true;
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt);
 		}
 		return false;
 	}
-	
-	//AppIdÎ°ú Îß§Î¨º ÌÉÄÏûÖ ÏàòÏ†ï
-	public static boolean updateAppTradeType(String appId, String trade_type) throws SQLException{
+
+	// AppId∑Œ ∏≈π∞ ≈∏¿‘ ºˆ¡§
+	public boolean updateAppTradeType(String appId, String trade_type) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
-		try{
+
+		try {
 			con = DBUtil.getConnection();
-			
+
 			pstmt = con.prepareStatement(sql.getProperty("updateAppTradeType"));
 			pstmt.setString(1, trade_type);
 			pstmt.setString(2, appId);
-			
+
 			int result = pstmt.executeUpdate();
-			if(result == 1){
+
+			if (result == 1) {
 				return true;
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt);
 		}
 		return false;
 	}
-	
-	//AppIdÎ°ú ÏÑ∏ÏûÖÏûê Ïó¨Î∂Ä ÏàòÏ†ï
-	public static boolean updateAppTenant(String appId, String tenant) throws SQLException{
+
+	// AppId∑Œ ºº¿‘¿⁄ ø©∫Œ ºˆ¡§
+	public boolean updateAppTenant(String appId, String tenant) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
-		try{
+
+		try {
 			con = DBUtil.getConnection();
-			
+
 			pstmt = con.prepareStatement(sql.getProperty("updateAppTenant"));
 			pstmt.setString(1, tenant);
 			pstmt.setString(2, appId);
-			
-			int result = pstmt.executeUpdate();
-			if(result == 1){
+
+			int result = 0;
+
+			result = pstmt.executeUpdate();
+			if (result == 1) {
 				return true;
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt);
 		}
 		return false;
 	}
-	
-	//AppIdÎ°ú Ìï¥Îãπ App Ï†ïÎ≥¥ ÏÇ≠Ï†ú 
-	public static boolean deleteApp(String appId) throws SQLException{
+
+	// AppId∑Œ «ÿ¥Á App ¡§∫∏ ªË¡¶
+	public boolean deleteApp(String appId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		try{
+
+		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("deleteApp"));
 			pstmt.setString(1, appId);
+
 			int result = pstmt.executeUpdate();
-			if(result == 1){
+
+			if (result == 1) {
 				return true;
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt);
 		}
 		return false;
 	}
-	
-	//AppIdÎ°ú Í¥ÄÎ†® Î™®Îì† Ï†ïÎ≥¥ ÏÇ≠Ï†ú 
-	public static boolean deleteAllApp(String appId) throws SQLException{
+
+	// AppId∑Œ ∞¸∑√ ∏µÁ ¡§∫∏ ªË¡¶
+	public boolean deleteAllApp(String appId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		try{
+
+		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("deleteApp"));
 			pstmt.setString(1, appId);
+
 			int result = pstmt.executeUpdate();
-			if(result == 1){
+
+			if (result == 1) {
 				return true;
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt);
 		}
 		return false;

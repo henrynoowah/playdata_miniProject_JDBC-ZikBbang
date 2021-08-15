@@ -9,210 +9,210 @@ import building.model.dto.SellerDTO;
 
 public class RunningEndView {
 
-	// ëª¨ë“  ë§¤ë¬¼ì •ë³´ ì¶œë ¥
+	// ¸ğµç Á¤º¸ Ãâ·Â
 	public static void AppListView(ArrayList allApp) {
 		if (allApp != null) {
-			int length = allApp.size(); // ì €ì¥ëœ ë°ì´í„° ê°œìˆ˜ ë°˜í™˜
+			int length = allApp.size(); // ÀúÀåµÈ µ¥ÀÌÅÍ °³¼ö ¹İÈ¯
 
 			if (length != 0) {
 				for (int index = 0; index < length; index++) {
 					System.out.println(allApp.get(index));
 				}
 			} else {
-				System.out.println("ìš”ì²­í•˜ì‹  í”„ë¡œì íŠ¸ ì •ë³´ëŠ” ì—†ìŠµë‹ˆë‹¤");
+				System.out.println("¿äÃ»ÇÏ½Å Á¤º¸´Â ¾ø½À´Ï´Ù");
 			}
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  í”„ë¡œì íŠ¸ë“¤ ì •ë³´ëŠ” ì—†ìŠµë‹ˆë‹¤");
+			System.out.println("¿äÃ»ÇÏ½Å Á¤º¸´Â ¾ø½À´Ï´Ù");
 		}
 	}
 
-	// Regionìœ¼ë¡œ ê²€ìƒ‰í•œ ê²°ê³¼ ì¶œë ¥
+	// RegionÀ¸·Î °Ë»öÇÑ °á°ú Ãâ·Â
 	public static void allRegion(ArrayList<BuildingDTO> data) {
 		if (data != null) {
-			int length = data.size(); // ì €ì¥ëœ ë°ì´í„° ê°œìˆ˜ ë°˜í™˜
+			int length = data.size(); // ÀúÀåµÈ µ¥ÀÌÅÍ °³¼ö ¹İÈ¯
 
 			if (length != 0) {
 				for (int index = 0; index < length; index++) {
 					System.out.println(data.get(index));
 				}
 			} else {
-				System.out.println("ìš”ì²­í•˜ì‹  ì§€ì—­ì— ëŒ€í•œ ì •ë³´ëŠ” ì—†ìŠµë‹ˆë‹¤");
+				System.out.println("¿äÃ»ÇÏ½Å Áö¿ª¿¡ ´ëÇÑ Á¤º¸´Â ¾ø½À´Ï´Ù");
 			}
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  ì§€ì—­ì— ëŒ€í•œ ì •ë³´ëŠ” ì—†ìŠµë‹ˆë‹¤");
+			System.out.println("¿äÃ»ÇÏ½Å Áö¿ª¿¡ ´ëÇÑ Á¤º¸´Â ¾ø½À´Ï´Ù");
 		}
 	}
 
-	// Building Typeë¡œ ê²€ìƒ‰í•œ ê²°ê³¼ ì¶œë ¥
+	// Building Type·Î °Ë»öÇÑ °á°ú Ãâ·Â
 	public static void allBuildingType(ArrayList<BuildingDTO> data) {
 		if (data != null) {
-			int length = data.size(); // ì €ì¥ëœ ë°ì´í„° ê°œìˆ˜ ë°˜í™˜
+			int length = data.size(); // ÀúÀåµÈ µ¥ÀÌÅÍ °³¼ö ¹İÈ¯
 
 			if (length != 0) {
 				for (int index = 0; index < length; index++) {
 					System.out.println(data.get(index));
 				}
 			} else {
-				System.out.println("ìš”ì²­í•˜ì‹  ê±´ë¬¼ ìœ í˜•ì— ëŒ€í•œ ì •ë³´ëŠ” ì—†ìŠµë‹ˆë‹¤");
+				System.out.println("¿äÃ»ÇÏ½Å °Ç¹° À¯Çü¿¡ ´ëÇÑ Á¤º¸´Â ¾ø½À´Ï´Ù");
 			}
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  ê±´ë¬¼ ìœ í˜•ì— ëŒ€í•œ ì •ë³´ëŠ” ì—†ìŠµë‹ˆë‹¤");
+			System.out.println("¿äÃ»ÇÏ½Å °Ç¹° À¯Çü¿¡ ´ëÇÑ Á¤º¸´Â ¾ø½À´Ï´Ù");
 		}
 	}
 
-	// íŠ¹ì • App ì¶œë ¥
+	// Æ¯Á¤ App Ãâ·Â
 	public static void AppView(AppDTO app) {
 		if (app != null) {
 			System.out.println(app);
 		} else {
-			System.out.println("í•´ë‹¹ App IdëŠ” ì—†ìŠµë‹ˆë‹¤");
+			System.out.println("ÇØ´ç App Id´Â ¾ø½À´Ï´Ù");
 		}
 	}
 
-	// íŠ¹ì • Building ì¶œë ¥
+	// Æ¯Á¤ Building Ãâ·Â
 	public static void BuildingView(BuildingDTO building) {
 		if (building != null) {
 			System.out.println(building);
 		} else {
-			System.out.println("í•´ë‹¹ Building IdëŠ” ì—†ìŠµë‹ˆë‹¤");
+			System.out.println("ÇØ´ç Building Id´Â ¾ø½À´Ï´Ù");
 		}
 	}
 
-	// íŠ¹ì • Price ì¶œë ¥
+	// Æ¯Á¤ Price Ãâ·Â
 	public static void PriceView(PriceDTO price) {
 		if (price != null) {
 			System.out.println(price);
 		} else {
-			System.out.println("í•´ë‹¹ App IdëŠ” ì—†ìŠµë‹ˆë‹¤");
+			System.out.println("ÇØ´ç App Id´Â ¾ø½À´Ï´Ù");
 		}
 	}
 
-	// íŠ¹ì • Price ì¶œë ¥
+	// Æ¯Á¤ Price Ãâ·Â
 	public static void ComparePriceView(ArrayList<PriceDTO> price) {
 		if (price != null) {
-			int length = price.size(); // ì €ì¥ëœ ë°ì´í„° ê°œìˆ˜ ë°˜í™˜
+			int length = price.size(); // ÀúÀåµÈ µ¥ÀÌÅÍ °³¼ö ¹İÈ¯
 
 			if (length != 0) {
 				for (int index = 0; index < length; index++) {
 					System.out.println(price.get(index));
 				}
 			} else {
-				System.out.println("í•´ë‹¹ ê°€ê²©ëŒ€ì˜ ë§¤ë¬¼ì— ëŒ€í•œ ì •ë³´ëŠ” ì—†ìŠµë‹ˆë‹¤");
+				System.out.println("ÇØ´ç °¡°İ´ëÀÇ ¸Å¹°¿¡ ´ëÇÑ Á¤º¸´Â ¾ø½À´Ï´Ù");
 			}
 		} else {
-			System.out.println("í•´ë‹¹ ê°€ê²©ëŒ€ì˜ ë§¤ë¬¼ì€ ì—†ìŠµë‹ˆë‹¤");
+			System.out.println("ÇØ´ç °¡°İ´ëÀÇ ¸Å¹°Àº ¾ø½À´Ï´Ù");
 		}
 	}
 
-	// íŠ¹ì • Seller ì¶œë ¥
+	// Æ¯Á¤ Seller Ãâ·Â
 	public static void SellerView(SellerDTO seller) {
 		if (seller != null) {
 			System.out.println(seller);
 		} else {
-			System.out.println("í•´ë‹¹ App IdëŠ” ì—†ìŠµë‹ˆë‹¤");
+			System.out.println("ÇØ´ç App Id´Â ¾ø½À´Ï´Ù");
 		}
 	}
 
-	// Buildingupdate ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// Buildingupdate ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void updateBuildingView(boolean result, String buildingId) {
 		if (result == true) {
-			System.out.println("ìš”ì²­í•˜ì‹  " + buildingId + "ì˜ region, address, building_type ìˆ˜ì • ì™„ë£Œ");
+			System.out.println("\n¿äÃ»ÇÏ½Å [Building Id : " + buildingId + "]ÀÇ °Ç¹° Á¤º¸ ¼öÁ¤ ¿Ï·á");
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  " + buildingId + " ìˆ˜ì • ì‹¤íŒ¨, id ì¬í™•ì¸ í•˜ì„¸ìš”");
+			System.out.println("\n¿äÃ»ÇÏ½Å [Building Id : " + buildingId + "] ¼öÁ¤ ½ÇÆĞ, id ÀçÈ®ÀÎ ÇÏ¼¼¿ä");
 		}
 	}
 
-	// Priceupdate ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// Priceupdate ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void updatePriceView(boolean result, String appId) {
 		if (result == true) {
-			System.out.println("ìš”ì²­í•˜ì‹  " + appId + "ì˜ deposit, monthly_rent, trade_price ìˆ˜ì • ì™„ë£Œ");
+			System.out.println("\n¿äÃ»ÇÏ½Å [App Id : " + appId + "]ÀÇ °¡°İ Á¤º¸ ¼öÁ¤ ¿Ï·á");
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  " + appId + " ìˆ˜ì • ì‹¤íŒ¨, id ì¬í™•ì¸ í•˜ì„¸ìš”");
+			System.out.println("\n¿äÃ»ÇÏ½Å [App Id : " + appId + "] ¼öÁ¤ ½ÇÆĞ, id ÀçÈ®ÀÎ ÇÏ¼¼¿ä");
 		}
 	}
 
-	// Sellerupdate ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// Sellerupdate ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void updateSellerView(boolean result, String sellerId) {
 		if (result == true) {
-			System.out.println("ìš”ì²­í•˜ì‹  " + sellerId + "ì˜ name, phone ìˆ˜ì • ì™„ë£Œ");
+			System.out.println("\n¿äÃ»ÇÏ½Å [Seller Id : " + sellerId + "]ÀÇ ÆÇ¸ÅÀÚ Á¤º¸ ¼öÁ¤ ¿Ï·á");
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  " + sellerId + " ìˆ˜ì • ì‹¤íŒ¨, id ì¬í™•ì¸ í•˜ì„¸ìš”");
+			System.out.println("\n¿äÃ»ÇÏ½Å [Seller Id : " + sellerId + "] ¼öÁ¤ ½ÇÆĞ, id ÀçÈ®ÀÎ ÇÏ¼¼¿ä");
 		}
 	}
 
-	// TradeTypeupdate ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// TradeTypeupdate ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void updateTradeTypeView(boolean result, String appId) {
 		if (result == true) {
-			System.out.println("ìš”ì²­í•˜ì‹  " + appId + "ì˜ trade_type ìˆ˜ì • ì™„ë£Œ");
+			System.out.println("\n¿äÃ»ÇÏ½Å [App Id : " + appId + "]ÀÇ °Å·¡ À¯Çü ¼öÁ¤ ¿Ï·á");
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  " + appId + " ìˆ˜ì • ì‹¤íŒ¨, id ì¬í™•ì¸ í•˜ì„¸ìš”");
+			System.out.println("\n¿äÃ»ÇÏ½Å [App Id : " + appId + "] ¼öÁ¤ ½ÇÆĞ, id ÀçÈ®ÀÎ ÇÏ¼¼¿ä");
 		}
 	}
 
-	// Tenantupdate ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// Tenantupdate ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void updateTenantView(boolean result, String appId) {
 		if (result == true) {
-			System.out.println("ìš”ì²­í•˜ì‹  " + appId + "ì˜ tenant ìˆ˜ì • ì™„ë£Œ");
+			System.out.println("\n¿äÃ»ÇÏ½Å [App Id : " + appId + "]ÀÇ ¼¼ÀÔÀÚ ¿©ºÎ ¼öÁ¤ ¿Ï·á");
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  " + appId + " ìˆ˜ì • ì‹¤íŒ¨, id ì¬í™•ì¸ í•˜ì„¸ìš”");
+			System.out.println("\n¿äÃ»ÇÏ½Å [App Id : " + appId + "] ¼öÁ¤ ½ÇÆĞ, id ÀçÈ®ÀÎ ÇÏ¼¼¿ä");
 		}
 	}
 
-	// App insert ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// App insert ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void insertAppView(boolean result, String Id) {
 		if (result == true) {
-			System.out.println("ìš”ì²­í•˜ì‹  [App Id : " + Id + "] App insert ì™„ë£Œ");
+			System.out.println("\n¿äÃ»ÇÏ½Å [App Id : " + Id + "] App insert ¿Ï·á");
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  [App Id : " + Id + "] App insert ì‹¤íŒ¨, id ì¬í™•ì¸ í•˜ì„¸ìš”");
+			System.out.println("\n¿äÃ»ÇÏ½Å [App Id : " + Id + "] App insert ½ÇÆĞ, id ÀçÈ®ÀÎ ÇÏ¼¼¿ä");
 		}
 	}
-	
-	// Building insert ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+
+	// Building insert ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void insertBuildingView(boolean result, String Id) {
 		if (result == true) {
-			System.out.println("ìš”ì²­í•˜ì‹  [Building Id : " + Id + "] Building insert ì™„ë£Œ");
+			System.out.println("\n¿äÃ»ÇÏ½Å [Building Id : " + Id + "] Building insert ¿Ï·á");
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  [Building Id : " + Id + "] insert ì‹¤íŒ¨, id ì¬í™•ì¸ í•˜ì„¸ìš”");
+			System.out.println("\n¿äÃ»ÇÏ½Å [Building Id : " + Id + "] insert ½ÇÆĞ, id ÀçÈ®ÀÎ ÇÏ¼¼¿ä");
 		}
 	}
-	
-	// Price insert ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+
+	// Price insert ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void insertPriceView(boolean result, String Id) {
 		if (result == true) {
-			System.out.println("ìš”ì²­í•˜ì‹  [App id : " + Id + "] Price insert ì™„ë£Œ");
+			System.out.println("\n¿äÃ»ÇÏ½Å [App id : " + Id + "] Price insert ¿Ï·á");
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  [App id : " + Id + "] insert ì‹¤íŒ¨, id ì¬í™•ì¸ í•˜ì„¸ìš”");
+			System.out.println("\n¿äÃ»ÇÏ½Å [App id : " + Id + "] insert ½ÇÆĞ, id ÀçÈ®ÀÎ ÇÏ¼¼¿ä");
 		}
 	}
-	
-	// Seller insert ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+
+	// Seller insert ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void insertSellerView(boolean result, String Id) {
 		if (result == true) {
-			System.out.println("ìš”ì²­í•˜ì‹  [Seller Id : " + Id + "] Seller insert ì™„ë£Œ");
+			System.out.println("\n¿äÃ»ÇÏ½Å [Seller Id : " + Id + "] Seller insert ¿Ï·á");
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  [Seller Id : " + Id + "] Seller ì‹¤íŒ¨, id ì¬í™•ì¸ í•˜ì„¸ìš”");
+			System.out.println("\n¿äÃ»ÇÏ½Å [Seller Id : " + Id + "] Seller ½ÇÆĞ, id ÀçÈ®ÀÎ ÇÏ¼¼¿ä");
 		}
 	}
 
-	// App delete ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
+	// App delete ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
 	public static void deleteAppView(boolean result, String Id) {
 		if (result == true) {
-			System.out.println("ìš”ì²­í•˜ì‹  [App Id : " + Id + "] App delete ì™„ë£Œ");
+			System.out.println("\n¿äÃ»ÇÏ½Å [App Id : " + Id + "] App delete ¿Ï·á");
 		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  [App Id : " + Id + "] App delete ì‹¤íŒ¨, id ì¬í™•ì¸ í•˜ì„¸ìš”");
-		}
-	}
-	
-	// Seller delete ì„±ê³µ, ì‹¤íŒ¨ì‹œ ë©”ì‹œì§€ ì¶œë ¥ -
-	public static void deleteSellerView(boolean result, String Id) {
-		if (result == true) {
-			System.out.println("ìš”ì²­í•˜ì‹  [Seller Id : " + Id + "] Seller delete ì™„ë£Œ");
-		} else {
-			System.out.println("ìš”ì²­í•˜ì‹  [Seller Id : " + Id + "] Seller delete ì‹¤íŒ¨, id ì¬í™•ì¸ í•˜ì„¸ìš”");
+			System.out.println("\n¿äÃ»ÇÏ½Å [App Id : " + Id + "] App delete ½ÇÆĞ, id ÀçÈ®ÀÎ ÇÏ¼¼¿ä");
 		}
 	}
 
-	// ì˜ˆì™¸ ìƒí™© ì¶œë ¥
+	// Seller delete ¼º°ø, ½ÇÆĞ½Ã ¸Ş½ÃÁö Ãâ·Â -
+	public static void deleteSellerView(boolean result, String Id) {
+		if (result == true) {
+			System.out.println("\n¿äÃ»ÇÏ½Å [Seller Id : " + Id + "] Seller delete ¿Ï·á");
+		} else {
+			System.out.println("\n¿äÃ»ÇÏ½Å [Seller Id : " + Id + "] Seller delete ½ÇÆĞ, id ÀçÈ®ÀÎ ÇÏ¼¼¿ä");
+		}
+	}
+
+	// ¿¹¿Ü »óÈ² Ãâ·Â
 	public static void showError(String message) {
 		System.out.println(message);
 	}

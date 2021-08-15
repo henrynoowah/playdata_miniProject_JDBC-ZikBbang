@@ -52,13 +52,13 @@ public class BuildingDTO {
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
 
-		builder.append("[ê±´ë¬¼ ë§¤ë¬¼ ë²ˆí˜¸: ");
+		builder.append("[°Ç¹° ¸Å¹° ¹øÈ£: ");
 		builder.append(buildingID);
-		builder.append("], [ë§¤ë¬¼ ì§€ì—­: ");
+		builder.append("], [¸Å¹° Áö¿ª: ");
 		builder.append(region);
-		builder.append("], \t[ë§¤ë¬¼ ìƒì„¸ ì£¼ì†Œ: ");
+		builder.append("], \t[¸Å¹° »ó¼¼ ÁÖ¼Ò: ");
 		builder.append(address);
-		builder.append("], \t[ë§¤ë¬¼ ì¢…ë¥˜: ");
+		builder.append("], \t[¸Å¹° Á¾·ù: ");
 		builder.append(buildingType + "]");
 		
 		return builder.toString();

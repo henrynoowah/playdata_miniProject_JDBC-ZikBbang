@@ -61,15 +61,15 @@ public class AppDTO {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("[ì§ë¹µ ë“±ë¡ë²ˆí˜¸: ");
+		builder.append("[Á÷»§ µî·Ï¹øÈ£: ");
 		builder.append(appID);
-		builder.append("], [ê±´ë¬¼ ë§¤ë¬¼ ë²ˆí˜¸: ");
+		builder.append("], [°Ç¹° ¸Å¹° ¹øÈ£: ");
 		builder.append(buildingID);
-		builder.append("], [ë§¤ë¬¼ íƒ€ì…: ");
+		builder.append("], [¸Å¹° Å¸ÀÔ: ");
 		builder.append(tradeType);
-		builder.append("], [íŒë§¤ì: ");
+		builder.append("], [ÆÇ¸ÅÀÚ: ");
 		builder.append(sellerID);
-		builder.append("], [ì„¸ì…ì ì—¬ë¶€: ");
+		builder.append("], [¼¼ÀÔÀÚ ¿©ºÎ: ");
 		builder.append(tenant + "]");
 		
 		return builder.toString();

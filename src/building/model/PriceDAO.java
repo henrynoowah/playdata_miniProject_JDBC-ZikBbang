@@ -7,148 +7,160 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import building.model.dto.AppDTO;
-import building.model.dto.BuildingDTO;
 import building.model.dto.PriceDTO;
 import building.model.util.DBUtil;
 
 public class PriceDAO {
+	
 	private static Properties sql = DBUtil.getSql();
 	
-	//Î™®Îì† Îß§Î¨ºÏ†ïÎ≥¥ Í≤ÄÏÉâ
-	public static ArrayList<PriceDTO> getAllPrice() throws SQLException{
+	private static PriceDAO instance = new PriceDAO();
+
+	private PriceDAO() {}
+
+	public static PriceDAO getInstance() {
+		return instance;
+	}
+
+	// ∏µÁ ∏≈π∞¡§∫∏ ∞Àªˆ
+	public ArrayList<PriceDTO> getAllPrice() throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<PriceDTO> list = null;
-		
-		try{
+
+		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("getAllPrice"));
 			rset = pstmt.executeQuery();
-			
 			list = new ArrayList<PriceDTO>();
-			while(rset.next()){
-				list.add( new PriceDTO(rset.getString(1), rset.getInt(2), rset.getInt(3), rset.getInt(4)) );
+
+			while (rset.next()) {
+				list.add(new PriceDTO(rset.getString(1), rset.getInt(2), rset.getInt(3), rset.getInt(4)));
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt, rset);
 		}
 		return list;
 	}
-	
-	//AppIdÎ°ú Í≤ÄÏÉâÌïú Í≤∞Í≥º Î∞òÌôò
-	public static PriceDTO getPrice(String appId) throws SQLException{
+
+	// AppId∑Œ ∞Àªˆ«— ∞·∞˙ π›»Ø
+	public PriceDTO getPrice(String appId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		PriceDTO price = null;
-		
-		try{
+
+		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("getPrice"));
 			pstmt.setString(1, appId);
 			rset = pstmt.executeQuery();
-			if(rset.next()){
+
+			if (rset.next()) {
 				price = new PriceDTO(rset.getString(1), rset.getInt(2), rset.getInt(3), rset.getInt(4));
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt, rset);
 		}
 		return price;
 	}
-	
-	//Í∞ÄÍ≤©ÎåÄÏóê ÎßûÎäî Îß§Î¨ºÏ†ïÎ≥¥ Í≤ÄÏÉâ
-	public static ArrayList<PriceDTO> getComparePrice(String type, int min, int max) throws SQLException{
+
+	// ∞°∞›¥Îø° ∏¬¥¬ ∏≈π∞¡§∫∏ ∞Àªˆ
+	public ArrayList<PriceDTO> getComparePrice(String type, int min, int max) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		ArrayList<PriceDTO> list = null;
-		
-		try{
+
+		try {
 			con = DBUtil.getConnection();
-			
-			if(type.equals("Î≥¥Ï¶ùÍ∏à")) {
+
+			if (type.equals("∫∏¡ı±›")) {
 				pstmt = con.prepareStatement(sql.getProperty("getComparePrice1"));
-			}else if(type.equals("ÏõîÏÑ∏")) {
+			} else if (type.equals("ø˘ºº")) {
 				pstmt = con.prepareStatement(sql.getProperty("getComparePrice2"));
-			}else if(type.equals("Îß§Îß§Í∞Ä")) {
+			} else if (type.equals("∏≈∏≈∞°")) {
 				pstmt = con.prepareStatement(sql.getProperty("getComparePrice3"));
 			}
+
 			pstmt.setInt(1, min);
 			pstmt.setInt(2, max);
 			rset = pstmt.executeQuery();
-			
 			list = new ArrayList<PriceDTO>();
-			while(rset.next()){
-				list.add( new PriceDTO(rset.getString(1), rset.getInt(2), rset.getInt(3), rset.getInt(4)) );
+
+			while (rset.next()) {
+				list.add(new PriceDTO(rset.getString(1), rset.getInt(2), rset.getInt(3), rset.getInt(4)));
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt, rset);
 		}
 		return list;
 	}
-	
-	//Îß§Î¨º Ï†ïÎ≥¥ Ï†ÄÏû•
-	public static boolean addPrice(PriceDTO price) throws SQLException{
+
+	// ∏≈π∞ ¡§∫∏ ¿˙¿Â
+	public boolean addPrice(PriceDTO price) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		try{
+		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("addPrice"));
 			pstmt.setString(1, price.getAppID());
 			pstmt.setInt(2, price.getDeposit());
 			pstmt.setInt(3, price.getMonthlyRent());
 			pstmt.setInt(4, price.getTradePrice());
-			
+
 			int result = pstmt.executeUpdate();
-		
-			if(result == 1){
+
+			if (result == 1) {
 				return true;
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt);
 		}
 		return false;
 	}
-	
-	//Price ÏàòÏ†ï
-	public static boolean updatePrice(String appId, int deposit, int monthly_rent, int trade_price) throws SQLException{
+
+	// Price ºˆ¡§
+	public boolean updatePrice(String appId, int deposit, int monthly_rent, int trade_price)
+			throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		
-		try{
+
+		try {
 			con = DBUtil.getConnection();
-			
 			pstmt = con.prepareStatement(sql.getProperty("updatePrice"));
 			pstmt.setInt(1, deposit);
 			pstmt.setInt(2, monthly_rent);
 			pstmt.setInt(3, trade_price);
 			pstmt.setString(4, appId);
-			
+
 			int result = pstmt.executeUpdate();
-			if(result == 1){
+
+			if (result == 1) {
 				return true;
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt);
 		}
 		return false;
 	}
-	
-	//AppIdÎ°ú Ìï¥Îãπ Price Ï†ïÎ≥¥ ÏÇ≠Ï†ú 
-	public static boolean deletePrice(String appId) throws SQLException{
+
+	// AppId∑Œ «ÿ¥Á Price ¡§∫∏ ªË¡¶
+	public boolean deletePrice(String appId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		try{
+		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("deletePrice"));
 			pstmt.setString(1, appId);
+
 			int result = pstmt.executeUpdate();
-			if(result == 1){
+
+			if (result == 1) {
 				return true;
 			}
-		}finally{
+		} finally {
 			DBUtil.close(con, pstmt);
 		}
 		return false;
