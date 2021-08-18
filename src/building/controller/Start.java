@@ -203,13 +203,24 @@ public class Start {
 										if(result3 == true) {
 											System.out.print("추가할 세입자 여부를 입력해주세요(TRUE or FALSE) : ");
 											String tenant = br.readLine();
-
-											BuildingDTO building = new BuildingDTO(buildingId, region, address, type);
-											PriceDTO price = new PriceDTO(appId, deposit, monthly_rent, trade_price);
-											AppDTO app = new AppDTO(appId, buildingId, trade_type, sellerId, tenant);
+																						
+											BuildingDTO building = BuildingDTO.builder().buildingID(buildingId)
+																						.region(region).address(address)
+																						.buildingType(type).build();
+											
+											PriceDTO price = PriceDTO.builder().appID(appId)
+																	 .deposit(deposit)
+																	 .monthlyRent(monthly_rent)
+																	 .tradePrice(trade_price).build();
+											
+											AppDTO app = AppDTO.builder().appID(appId)
+																		 .buildingID(buildingId)
+																		 .tradeType(trade_type)
+																		 .sellerID(sellerId)
+																		 .tenant(tenant).build();
 
 											System.out.println();
-											bc.addApp(app, building, price);
+//											bc.addApp(app, building, price);
 										}else {
 											System.out.println("\n해당 Seller Id는 존재하지 않습니다");
 										}
@@ -237,7 +248,9 @@ public class Start {
 							System.out.print("추가할 판매자 휴대폰 번호를 입력해주세요 : ");
 							String phone = br.readLine();
 							
-							SellerDTO seller = new SellerDTO(sellerId, sellerName, phone);
+							SellerDTO seller = SellerDTO.builder().sellerID(sellerId)
+																  .name(sellerName)
+																  .phone(phone).build();
 
 							System.out.println();
 							bc.addSeller(seller);
@@ -561,7 +574,6 @@ public class Start {
 
 	public static void start() {
 
-
 		System.out.println("============================================================");
 		System.out.println("직빵에 오신걸 환영합니다");
 		System.out.println("\n============================================================");
@@ -573,6 +585,8 @@ public class Start {
 				loginPage();
 			} else if(inputNum == 2) {
 				registerPage();
+			} else {
+				start();
 			}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -580,6 +594,4 @@ public class Start {
 			e.printStackTrace();
 		}
 	}
-
-
 }

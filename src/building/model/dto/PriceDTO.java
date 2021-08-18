@@ -1,5 +1,10 @@
 package building.model.dto;
 
+import lombok.Builder;
+import lombok.Data;
+
+@Data
+@Builder
 public class PriceDTO {
 	
 	private String appID;
@@ -7,47 +12,6 @@ public class PriceDTO {
 	private int monthlyRent;
 	private int tradePrice;
 	
-	public PriceDTO() {}
-	public PriceDTO(String appID, int deposit, int monthlyRent, int tradePrice) {
-		super();
-		this.appID = appID;
-		this.deposit = deposit;
-		this.monthlyRent = monthlyRent;
-		this.tradePrice = tradePrice;
-	}
-	
-	public String getAppID() {
-		return appID;
-	}
-
-	public void setAppID(String appID) {
-		this.appID = appID;
-	}
-
-	public int getDeposit() {
-		return deposit;
-	}
-
-	public void setDeposit(int deposit) {
-		this.deposit = deposit;
-	}
-
-	public int getMonthlyRent() {
-		return monthlyRent;
-	}
-
-	public void setMonthlyRent(int monthlyRent) {
-		this.monthlyRent = monthlyRent;
-	}
-
-	public int getTradePrice() {
-		return tradePrice;
-	}
-
-	public void setTradePrice(int tradePrice) {
-		this.tradePrice = tradePrice;
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();

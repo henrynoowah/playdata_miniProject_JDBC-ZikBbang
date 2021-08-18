@@ -21,12 +21,14 @@ public class ProfileDAO {
 		return instance;
 	}
 	
+	
 	//로그인정보 가져오기
 	public ProfileDTO getProfile(String nickName, String pw) throws SQLException {
+		ProfileDTO profile = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ProfileDTO profile = null;
 		
 		try {
 			con = DBUtil.getConnection();
@@ -35,8 +37,11 @@ public class ProfileDAO {
 			pstmt.setString(2, pw);
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
-				profile = new ProfileDTO(rset.getString(1), rset.getString(2), rset.getString(3));
+			if(rset.next()) {	
+				profile = ProfileDTO.builder().nickName(rset.getString(1))
+											  .pw(rset.getString(2))
+											  .sellerId(rset.getString(3)).build();
+				
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -45,12 +50,14 @@ public class ProfileDAO {
 		return profile;
 	}
 	
+	
 	// 계정정보 가져오기
 	public ProfileDTO getProfile(String nickName) throws SQLException {
+		ProfileDTO profile = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ProfileDTO profile = null;
 		
 		try {
 			con = DBUtil.getConnection();
@@ -59,11 +66,15 @@ public class ProfileDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				profile = new ProfileDTO(rset.getString(1), rset.getString(2), rset.getString(3));
+				profile = ProfileDTO.builder().nickName(rset.getString(1))
+						  					  .pw(rset.getString(2))
+						  					  .sellerId(rset.getString(3)).build();
+				
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
 		}		
+		
 		return profile;
 	}
 
@@ -72,7 +83,6 @@ public class ProfileDAO {
 	public boolean addProfile(String newNickName, String newPw) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 		
 		try {
 			con = DBUtil.getConnection();
@@ -92,10 +102,10 @@ public class ProfileDAO {
 		return false;
 	}
 
+	
 	public boolean addProfileSeller(String nickName, String sellerId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 		
 		try {
 			con = DBUtil.getConnection();
@@ -111,6 +121,7 @@ public class ProfileDAO {
 		} finally {
 			DBUtil.close(con, pstmt);
 		}		
+		
 		return false;
 	}
 }

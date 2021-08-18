@@ -24,10 +24,11 @@ public class AppDAO {
 
 	// 모든 매물정보 검색
 	public ArrayList<AppDTO> getAllApp() throws SQLException {
+		ArrayList<AppDTO> list = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<AppDTO> list = null;
 
 		try {
 			con = DBUtil.getConnection();
@@ -37,8 +38,11 @@ public class AppDAO {
 			list = new ArrayList<AppDTO>();
 
 			while (rset.next()) {
-				list.add(new AppDTO(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4),
-						rset.getString(5)));
+				list.add(AppDTO.builder().appID(rset.getString(1))
+										 .buildingID(rset.getString(2))
+										 .tradeType(rset.getString(3))
+										 .sellerID(rset.getString(4))
+										 .tenant(rset.getString(5)).build());
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -48,10 +52,11 @@ public class AppDAO {
 
 	// AppId로 검색한 결과 반환
 	public AppDTO getApp(String appId) throws SQLException {
+		AppDTO app = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		AppDTO app = null;
 
 		try {
 			con = DBUtil.getConnection();
@@ -60,8 +65,11 @@ public class AppDAO {
 			rset = pstmt.executeQuery();
 
 			while (rset.next()) {
-				app = new AppDTO(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4),
-						rset.getString(5));
+				app = AppDTO.builder().appID(rset.getString(1))
+						 			  .buildingID(rset.getString(2))
+						 			  .tradeType(rset.getString(3))
+						 			  .sellerID(rset.getString(4))
+						 			  .tenant(rset.getString(5)).build();
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -98,6 +106,7 @@ public class AppDAO {
 	public boolean updateAppTradeType(String appId, String trade_type) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		int result = 0;
 
 		try {
 			con = DBUtil.getConnection();
@@ -106,7 +115,7 @@ public class AppDAO {
 			pstmt.setString(1, trade_type);
 			pstmt.setString(2, appId);
 
-			int result = pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 
 			if (result == 1) {
 				return true;
@@ -121,6 +130,7 @@ public class AppDAO {
 	public boolean updateAppTenant(String appId, String tenant) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		int result = 0;
 
 		try {
 			con = DBUtil.getConnection();
@@ -129,7 +139,6 @@ public class AppDAO {
 			pstmt.setString(1, tenant);
 			pstmt.setString(2, appId);
 
-			int result = 0;
 
 			result = pstmt.executeUpdate();
 			if (result == 1) {
@@ -145,13 +154,14 @@ public class AppDAO {
 	public boolean deleteApp(String appId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
-
+		int result = 0;
+		
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("deleteApp"));
 			pstmt.setString(1, appId);
 
-			int result = pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 
 			if (result == 1) {
 				return true;
@@ -166,13 +176,14 @@ public class AppDAO {
 	public boolean deleteAllApp(String appId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		int result = 0;
 
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("deleteApp"));
 			pstmt.setString(1, appId);
 
-			int result = pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
 
 			if (result == 1) {
 				return true;

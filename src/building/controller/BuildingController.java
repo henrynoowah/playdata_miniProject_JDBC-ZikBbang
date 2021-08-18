@@ -46,7 +46,7 @@ public class BuildingController {
 		} catch (SQLException s) {
 			s.printStackTrace();
 		} catch (NullPointerException e) {
-//			e.printStackTrace();
+			// e.printStackTrace();
 		}
 		return false;
 	}
@@ -285,7 +285,6 @@ public class BuildingController {
 		} catch (SQLException s) {
 			RunningEndView.showError("Seller Id로 해당 매물 검색 오류 ");
 		}
-
 		return false;
 	}
 
@@ -367,7 +366,6 @@ public class BuildingController {
 		} catch (SQLException s) {
 			RunningEndView.showError("새로운 매물(App) 저장시 에러 발생");
 		}
-
 		return result;
 	}
 
@@ -426,7 +424,6 @@ public class BuildingController {
 		} catch (NotExistException e) {
 			RunningEndView.showError("Seller 삭제 에러 발생");
 		}
-
 		return result;
 	}
 
@@ -465,8 +462,4 @@ public class BuildingController {
 		Log.welcome();
 		Start.start();
 	}
-
-
-
-
 }

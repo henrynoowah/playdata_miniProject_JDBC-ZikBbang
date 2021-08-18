@@ -1,42 +1,15 @@
 package building.model.dto;
 
+import lombok.Data;
+import lombok.experimental.SuperBuilder;
+
+@Data
+@SuperBuilder
 public class ProfileDTO {
 	
 	private String nickName;
 	private String pw;
 	private String sellerId;
-	
-	public ProfileDTO() {}
-	public ProfileDTO(String sellerID, String name, String phone) {
-		super();
-		this.nickName = sellerID;
-		this.pw = name;
-		this.sellerId = phone;
-	}
-
-	public String getNickName() {
-		return nickName;
-	}
-	
-	public void setNickName(String nickName) {
-		this.nickName = nickName;
-	}
-	
-	public String getPw() {
-		return pw;
-	}
-	
-	public void setPw(String pw) {
-		this.pw = pw;
-	}
-	
-	public String getSellerId() {
-		return sellerId;
-	}
-	
-	public void setSellerId(String sellerId) {
-		this.sellerId = sellerId;
-	}
 	
 	@Override
 	public String toString() {

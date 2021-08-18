@@ -35,8 +35,11 @@ public class BuildingDAO {
 			rset = pstmt.executeQuery();
 			list = new ArrayList<BuildingDTO>();
 
-			while (rset.next()) {
-				list.add(new BuildingDTO(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4)));
+			while (rset.next()) {				
+				list.add(BuildingDTO.builder().buildingID(rset.getString(1))
+											  .region(rset.getString(2))
+											  .address(rset.getString(3))
+											  .buildingType(rset.getString(4)).build());
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -58,7 +61,10 @@ public class BuildingDAO {
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-				building = new BuildingDTO(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4));
+				building = BuildingDTO.builder().buildingID(rset.getString(1))
+						  						.region(rset.getString(2))
+						  						.address(rset.getString(3))
+						  						.buildingType(rset.getString(4)).build();
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -81,7 +87,10 @@ public class BuildingDAO {
 			list = new ArrayList<BuildingDTO>();
 
 			while (rset.next()) {
-				list.add(new BuildingDTO(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4)));
+				list.add(BuildingDTO.builder().buildingID(rset.getString(1))
+  											  .region(rset.getString(2))
+  											  .address(rset.getString(3))
+  											  .buildingType(rset.getString(4)).build());
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -104,7 +113,10 @@ public class BuildingDAO {
 			list = new ArrayList<BuildingDTO>();
 
 			while (rset.next()) {
-				list.add(new BuildingDTO(rset.getString(1), rset.getString(2), rset.getString(3), rset.getString(4)));
+				list.add(BuildingDTO.builder().buildingID(rset.getString(1))
+						  					  .region(rset.getString(2))
+						  					  .address(rset.getString(3))
+						  					  .buildingType(rset.getString(4)).build());
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
