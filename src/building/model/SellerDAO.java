@@ -24,10 +24,11 @@ public class SellerDAO {
 
 	// 모든 판매자정보 반환
 	public ArrayList<SellerDTO> getAllSeller() throws SQLException {
+		ArrayList<SellerDTO> list = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<SellerDTO> list = null;
 
 		try {
 			con = DBUtil.getConnection();
@@ -36,7 +37,7 @@ public class SellerDAO {
 			list = new ArrayList<SellerDTO>();
 
 			while (rset.next()) {
-				list.add(new SellerDTO(rset.getString(1), rset.getString(2), rset.getString(3)));
+//				list.add(new SellerDTO(rset.getString(1), rset.getString(2), rset.getString(3)));
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -46,10 +47,11 @@ public class SellerDAO {
 
 	// sellerId로 검색한 결과 반환
 	public SellerDTO getSeller(String sellerId) throws SQLException {
+		SellerDTO seller = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		SellerDTO seller = null;
 
 		try {
 			con = DBUtil.getConnection();
@@ -58,7 +60,7 @@ public class SellerDAO {
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-				seller = new SellerDTO(rset.getString(1), rset.getString(2), rset.getString(3));
+//				seller = new SellerDTO(rset.getString(1), rset.getString(2), rset.getString(3));
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -70,6 +72,7 @@ public class SellerDAO {
 	public boolean addSeller(SellerDTO seller) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("addSeller"));
@@ -115,6 +118,7 @@ public class SellerDAO {
 	public boolean deleteSeller(String sellerId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("deleteSeller"));

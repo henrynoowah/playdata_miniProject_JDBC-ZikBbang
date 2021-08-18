@@ -24,10 +24,11 @@ public class PriceDAO {
 
 	// 모든 매물정보 검색
 	public ArrayList<PriceDTO> getAllPrice() throws SQLException {
+		ArrayList<PriceDTO> list = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<PriceDTO> list = null;
 
 		try {
 			con = DBUtil.getConnection();
@@ -36,7 +37,10 @@ public class PriceDAO {
 			list = new ArrayList<PriceDTO>();
 
 			while (rset.next()) {
-				list.add(new PriceDTO(rset.getString(1), rset.getInt(2), rset.getInt(3), rset.getInt(4)));
+				list.add(PriceDTO.builder().appID(rset.getString(1))
+										   .deposit(rset.getInt(2))
+										   .monthlyRent(rset.getInt(3))
+										   .tradePrice(rset.getInt(4)).build());
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -58,7 +62,10 @@ public class PriceDAO {
 			rset = pstmt.executeQuery();
 
 			if (rset.next()) {
-				price = new PriceDTO(rset.getString(1), rset.getInt(2), rset.getInt(3), rset.getInt(4));
+				price = PriceDTO.builder().appID(rset.getString(1))
+						   				  .deposit(rset.getInt(2))
+						   				  .monthlyRent(rset.getInt(3))
+						   				  .tradePrice(rset.getInt(4)).build();
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -68,10 +75,11 @@ public class PriceDAO {
 
 	// 가격대에 맞는 매물정보 검색
 	public ArrayList<PriceDTO> getComparePrice(String type, int min, int max) throws SQLException {
+		ArrayList<PriceDTO> list = null;
+
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		ArrayList<PriceDTO> list = null;
 
 		try {
 			con = DBUtil.getConnection();
@@ -90,7 +98,10 @@ public class PriceDAO {
 			list = new ArrayList<PriceDTO>();
 
 			while (rset.next()) {
-				list.add(new PriceDTO(rset.getString(1), rset.getInt(2), rset.getInt(3), rset.getInt(4)));
+				list.add(PriceDTO.builder().appID(rset.getString(1))
+						   				   .deposit(rset.getInt(2))
+						   				   .monthlyRent(rset.getInt(3))
+						   				   .tradePrice(rset.getInt(4)).build());
 			}
 		} finally {
 			DBUtil.close(con, pstmt, rset);
@@ -102,6 +113,7 @@ public class PriceDAO {
 	public boolean addPrice(PriceDTO price) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("addPrice"));
@@ -122,8 +134,7 @@ public class PriceDAO {
 	}
 
 	// Price 수정
-	public boolean updatePrice(String appId, int deposit, int monthly_rent, int trade_price)
-			throws SQLException {
+	public boolean updatePrice(String appId, int deposit, int monthly_rent, int trade_price) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 
@@ -150,6 +161,7 @@ public class PriceDAO {
 	public boolean deletePrice(String appId) throws SQLException {
 		Connection con = null;
 		PreparedStatement pstmt = null;
+		
 		try {
 			con = DBUtil.getConnection();
 			pstmt = con.prepareStatement(sql.getProperty("deletePrice"));
